@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+html, * {
+  box-sizing: border-box;
+}
+
+.app {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+}
+
+@media (orientation: portrait){
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  #one .time-display {
+    transform: rotate(180deg)
+  }
+  #two .time-display {
+    transform: rotate(0);
+  }
+}
+
+@media (orientation: landscape){
+  .app {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  #one .time-display {
+    transform: rotate(90deg)
+  }
+  #two .time-display {
+    transform: rotate(-90deg)
+  }
+}
+
+#one {
+  background: rgb(140, 0, 0);
+}
+#two {
+  background: rgb(0, 0, 140);
+}
+#one.active {
+  background: red;
+}
+#two.active {
+  background: blue;
+}
+
+.half {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.time-display {
+  padding: 3rem;
+  font-size: 5rem;
+  background-color: rgba(200, 200, 200, 0.9);
+  border-radius: 1rem;
+  display: inline-block;
+}
+#one .time-display {
+  background: white;
+  color: black;
+}
+#two .time-display {
+  background: black;
+  color: white;
+}
+
+.button {
+  position: absolute;
+  left: calc(50% - 5rem);
+  top: calc(50% - 2rem);
+  width: 10rem;
+  height: 4rem;
+  background: orange;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 2;
+  cursor: pointer;
+}
