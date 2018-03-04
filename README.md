@@ -15,5 +15,6 @@ Use media queries for orientation to figure out where to display time.
 ###Todo
 - React to timer reaching 0 - stop game and alert
 - Display time remaining visually (either clock hand, border going round, div shrinking, etc)
+- Add ability to set each time
 - Different font for time.
 - Ability to switch layout - e.g. so displaying on a computer screen can press switch control to have no rotation. (easy via classNames)
