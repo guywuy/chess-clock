@@ -86,12 +86,21 @@ class App extends Component {
   timerEnded(){
     alert('Timer Ended! ' + this.state.currentlyActive + ' lost!');
     this.stopTimer();
+    this.setState({
+      'inProgress' : false,
+      'paused' : false,
+      'currentlyActive' : 'none',
+      'timeTotal_one' : 10,
+      'timeTotal_two' : 10,
+      'timeRemaining_one' : this.state.timeTotal_one,
+      'timeRemaining_two' : this.state.timeTotal_two
+    })
   }
 
   formatTime(time){
     let minutes = Math.floor(time/60);
     let seconds = time%60;
-    return `${minutes} : ${seconds === 0 ? '00' : seconds}`;
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
 
 

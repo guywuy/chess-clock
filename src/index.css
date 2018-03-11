@@ -69,6 +69,7 @@ h1, h2, h3, h4, h5 {
   background-color: rgba(200, 200, 200, 0.9);
   border-radius: 1rem;
   display: inline-block;
+  font-family: 'Inconsolata', monospace;
 }
 #one .time-display {
   background: white;
