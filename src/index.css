@@ -18,32 +18,6 @@ h1, h2, h3, h4, h5 {
   padding: 0;
 }
 
-@media (orientation: portrait){
-  .app {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  #one .time-display {
-    transform: rotate(180deg)
-  }
-  #two .time-display {
-    transform: rotate(0);
-  }
-}
-
-@media (orientation: landscape){
-  .app {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-  #one .time-display {
-    transform: rotate(90deg)
-  }
-  #two .time-display {
-    transform: rotate(-90deg)
-  }
-}
-
 #one {
   background: rgb(140, 0, 0);
 }
@@ -81,9 +55,6 @@ h1, h2, h3, h4, h5 {
 }
 
 .button {
-  position: absolute;
-  left: calc(50% - 5rem);
-  top: calc(50% - 2rem);
   width: 10rem;
   height: 4rem;
   background: orange;
@@ -92,4 +63,99 @@ h1, h2, h3, h4, h5 {
   text-align: center;
   line-height: 2;
   cursor: pointer;
+}
+.button--center {
+  position: absolute;
+  left: calc(50% - 5rem);
+  top: calc(50% - 2rem);
+}
+
+.timesetter {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
+  text-align: center;
+  background: ivory;
+  font-size: 1.4rem;
+  border-radius: 2rem;
+}
+.timesetter form {
+  display: grid;
+  grid-template-areas: 
+  'title title'
+  'timeone timetwo'
+  'submit submit';
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  grid-template-rows: 3fr 5fr 3fr;
+}
+.timesetter h1 {
+  grid-area: title;
+}
+.timesetter form input {
+  background: 0;
+  padding: 1rem;
+  line-height: 1.4rem;
+  margin-left: 1rem;
+  font-size: 4rem;
+  width: 12rem;
+}
+.timesetter form label {
+  font-weight: 500;
+}
+.timesetter form span {
+  font-size: 1rem;
+}
+.timesetter .button {
+  grid-area: submit;
+}
+
+@media (orientation: portrait){
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  #one .time-display {
+    transform: rotate(180deg)
+  }
+  #two .time-display {
+    transform: rotate(0);
+  }
+  .timesetter form {
+    grid-template-areas: 
+    'title'
+    'timeone'
+    'timetwo'
+    'submit';
+    grid-gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+    grid-template-rows: 2fr 4fr 4fr 2fr; 
+  }
+}
+
+@media (orientation: landscape){
+  .app {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  #one .time-display {
+    transform: rotate(90deg)
+  }
+  #two .time-display {
+    transform: rotate(-90deg)
+  }
+}
+
+@media (max-width: 420px){
+
+  .time-display {
+    font-size: 3rem;
+  }
+
 }

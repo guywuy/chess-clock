@@ -24,7 +24,7 @@ export const Button = ({
   }
 
   return (
-    <div className='button' onClick={handleClick}>
+    <div className='button button--center' onClick={handleClick}>
       {getCommand().toUpperCase()}
     </div>
   );

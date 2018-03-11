@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Half from './Half';
 import Button from './Button';
+import TimeSet from './TimeSet';
 
 class App extends Component {
 
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       'inProgress' : false,
       'paused' : false,
+      'timeIsSet' : false,
       'currentlyActive' : 'none',
       'timeTotal_one' : 10,
       'timeTotal_two' : 10,
@@ -20,6 +22,7 @@ class App extends Component {
     }
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleTimeSet = this.handleTimeSet.bind(this);
   }
 
   handleClick(which){
@@ -97,6 +100,18 @@ class App extends Component {
     })
   }
 
+  handleTimeSet(one, two){
+    console.log(one, two);
+    
+    this.setState({
+      'timeIsSet' : true,
+      'timeTotal_one' : one,
+      'timeTotal_two' : two,
+      'timeRemaining_one' : one,
+      'timeRemaining_two' : two
+    })
+  }
+
   formatTime(time){
     let minutes = Math.floor(time/60);
     let seconds = time%60;
@@ -127,6 +142,10 @@ class App extends Component {
         paused = {this.state.paused}
         onClick = {this.handleClick}
         />
+
+        { !this.state.timeIsSet && 
+        <TimeSet onSubmit={this.handleTimeSet} />
+        }
 
       </div>
     );
