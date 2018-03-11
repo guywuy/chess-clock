@@ -15,10 +15,10 @@ class App extends Component {
       'paused' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 10,
-      'timeTotal_two' : 10,
-      'timeRemaining_one' : 10,
-      'timeRemaining_two' : 10
+      'timeTotal_one' : 300,
+      'timeTotal_two' : 300,
+      'timeRemaining_one' : 300,
+      'timeRemaining_two' : 300
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -92,17 +92,15 @@ class App extends Component {
     this.setState({
       'inProgress' : false,
       'paused' : false,
+      'timeIsSet' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 10,
-      'timeTotal_two' : 10,
       'timeRemaining_one' : this.state.timeTotal_one,
       'timeRemaining_two' : this.state.timeTotal_two
     })
   }
 
   handleTimeSet(one, two){
-    console.log(one, two);
-    
+   
     this.setState({
       'timeIsSet' : true,
       'timeTotal_one' : one,
