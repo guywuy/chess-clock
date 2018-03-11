@@ -19,10 +19,10 @@ h1, h2, h3, h4, h5 {
 }
 
 #one {
-  background: rgb(140, 0, 0);
+  background: rgb(120, 0, 0);
 }
 #two {
-  background: rgb(0, 0, 140);
+  background: rgb(0, 0, 120);
 }
 #one.active {
   background: red;
@@ -152,10 +152,39 @@ h1, h2, h3, h4, h5 {
   }
 }
 
-@media (max-width: 420px){
-
+@media (orientation: landscape) and (max-width: 840px) {
   .time-display {
+    padding: 1rem;
     font-size: 3rem;
   }
+  .button {
+    width: 8rem;
+    height: 4rem;
+    font-size: 1.8rem;
+  }
+  .button--center {
+    left: calc(50% - 4rem);
+    top: calc(50% - 2rem);
+  }
+}
+@media (orientation: landscape) and (max-width: 620px) {
+  .time-display {
+    font-size: 2rem;
+  }
+  .button {
+    width: 6rem;
+    height: 3rem;
+    font-size: 1.6rem;
+  }
+  .button--center {
+    left: calc(50% - 3rem);
+    top: calc(50% - 1.5rem);
+  }
+}
 
+@media (orientation: portrait) and (max-width: 420px){
+  .time-display {
+    padding: 1rem;
+    font-size: 3rem;
+  }
 }
