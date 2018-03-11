@@ -13,15 +13,13 @@ class App extends Component {
       'inProgress' : false,
       'paused' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 600,
-      'timeTotal_two' : 600,
-      'timeRemaining_one' : 600,
-      'timeRemaining_two' : 600
+      'timeTotal_one' : 10,
+      'timeTotal_two' : 10,
+      'timeRemaining_one' : 10,
+      'timeRemaining_two' : 10
     }
 
     this.handleClick = this.handleClick.bind(this);
-
-    var intervalTimerOne;
   }
 
   handleClick(which){
@@ -32,26 +30,26 @@ class App extends Component {
       this.setState({
         'currentlyActive' : 'two'
       })
-      this.startTimerTwo();
+      this.startTimer('two');
     } else if (which === 'two'){
       if (this.state.paused) return;
       this.stopTimer();
       this.setState({
         'currentlyActive' : 'one'
       })
-      this.startTimerOne();
+      this.startTimer('one');
     } else if (which === 'pause'){
       this.stopTimer();
       this.setState({
         'paused' : true
       })
     } else if (which === 'resume'){
-      this.state.currentlyActive === 'one' ? this.startTimerOne() : this.startTimerTwo();
+      this.state.currentlyActive === 'one' ? this.startTimer('one') : this.startTimer('two');
       this.setState({
         'paused' : false
       })
     } else if (which === 'start'){
-      this.startTimerOne();
+      this.startTimer('one');
       this.setState({
         'currentlyActive' : 'one',
         'inProgress' : true,
@@ -60,36 +58,20 @@ class App extends Component {
     }
   }
 
-  startTimerOne(){
+  startTimer(which){
     let current = this.state.currentlyActive;
-    let tr = `timeRemaining_one`;
+    let tr = `timeRemaining_${which}`;
 
     this.intervalTimer = setInterval(()=>{
-      // if (this.state.timeRemaining<=1){
-      //   this.timerEnded();
-      // } else {
+      if (this.state[tr]<=1){
+        this.timerEnded(which);
+      } else {
         this.setState((prevState)=>{
           return {
             [tr] : --prevState[tr]
           }
         })
-      // }
-    }, 1000)
-  }
-  startTimerTwo(){
-    let current = this.state.currentlyActive;
-    let tr = `timeRemaining_two`;
-
-    this.intervalTimer = setInterval(()=>{
-      // if (this.state.timeRemaining<=1){
-      //   this.timerEnded();
-      // } else {
-        this.setState((prevState)=>{
-          return {
-            [tr] : --prevState[tr]
-          }
-        })
-      // }
+      }
     }, 1000)
   }
 
@@ -97,8 +79,9 @@ class App extends Component {
     clearInterval(this.intervalTimer);
   }
 
-  timerEnded(){
-    alert('Timer Ended!');
+  timerEnded(which){
+    alert('Timer Ended! ' + which + ' lost!');
+    this.stopTimer();
   }
 
   formatTime(time){
