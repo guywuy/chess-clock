@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import Half from './Half';
+import MuteButton from './MuteButton';
 import Button from './Button';
+import StopButton from './StopButton';
 import TimeSet from './TimeSet';
 
 class App extends Component {
@@ -24,6 +26,7 @@ class App extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleHalfClick = this.handleHalfClick.bind(this);
+    this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.playSound = this.playSound.bind(this);
     this.pauseSound = this.pauseSound.bind(this);
@@ -42,6 +45,19 @@ class App extends Component {
       'currentlyActive' : this.state.currentlyActive === 'one' ? 'two' : 'one'
     }, () => {
       this.startTimer();
+    })
+  }
+
+  handleMuteClick(){
+    if (!this.state.muted){
+      this.pauseSound('ticking');
+    } else {
+      if (this.state.inProgress && !this.state.paused){
+        this.playSound('ticking');
+      }
+    }
+    this.setState({
+      'muted' : !this.state.muted
     })
   }
 
@@ -161,11 +177,18 @@ class App extends Component {
         onClick = {this.handleHalfClick}
         />
 
+        <MuteButton 
+        muted = {this.state.muted}
+        onClick = {this.handleMuteClick} 
+        />
+
         <Button 
-        started = { this.state.inProgress }
+        started = {this.state.inProgress }
         paused = {this.state.paused}
         onClick = {this.handleClick}
         />
+
+        {/* <StopButton /> */}
 
         { !this.state.timeIsSet && 
         <TimeSet onSubmit={this.handleTimeSet} />

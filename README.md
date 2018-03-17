@@ -21,6 +21,5 @@ Use media queries for orientation to figure out where to display time.
 - Add proper end screen
 - Feature - hourglass mode - each player starts with a minute - while your time goes down opponent's increases and vice versa.
 - Other mode - simple 30 second per turn timer which resets each move.
-- Add mute button.
 - Allow 'reset game' button, with confirmation required before game is reset.
 - Refactor CSS to be cleaner and use css variables
