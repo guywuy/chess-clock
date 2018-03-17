@@ -120,7 +120,16 @@ h1, h2, h3, h4, h5 {
   top: calc(25% - 30px);
   cursor: pointer;
   border-radius: 50%;
-  background: orange;
+  background: white;
+}
+
+.button--stop {
+  position: absolute;
+  left: calc(50% - 30px);
+  top: calc(75% - 30px);
+  cursor: pointer;
+  border-radius: 50%;
+  background: white;
 }
 
 @media (orientation: portrait){

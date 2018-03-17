@@ -27,7 +27,9 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
+    this.handleStopClick = this.handleStopClick.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
+    this.endGame = this.endGame.bind(this);
     this.playSound = this.playSound.bind(this);
     this.pauseSound = this.pauseSound.bind(this);
   }
@@ -59,6 +61,11 @@ class App extends Component {
     this.setState({
       'muted' : !this.state.muted
     })
+  }
+
+  handleStopClick(){
+    this.pauseSound('ticking');
+    this.endGame();
   }
 
   handleClick(which){
@@ -120,6 +127,10 @@ class App extends Component {
       this.pauseSound('ticking');
       this.playSound('whistle');
     }
+    this.endGame();
+  }
+
+  endGame() {
     this.stopTimer();
     this.setState({
       'inProgress' : false,
@@ -188,7 +199,9 @@ class App extends Component {
         onClick = {this.handleClick}
         />
 
-        {/* <StopButton /> */}
+        <StopButton 
+        onClick = {this.handleStopClick} 
+        />
 
         { !this.state.timeIsSet && 
         <TimeSet onSubmit={this.handleTimeSet} />
