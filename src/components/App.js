@@ -18,32 +18,38 @@ class App extends Component {
       'timeTotal_one' : 300,
       'timeTotal_two' : 300,
       'timeRemaining_one' : 300,
-      'timeRemaining_two' : 300
+      'timeRemaining_two' : 300,
+      'muted' : false
     }
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
+    this.playSound = this.playSound.bind(this);
+    this.pauseSound = this.pauseSound.bind(this);
+  }
+
+  handleHalfClick(){
+    if (this.state.paused) return;
+
+    if (!this.state.muted){
+      this.playSound('switch');
+      this.playSound('ticking');
+    }
+
+    this.stopTimer();
+    this.setState({
+      'currentlyActive' : this.state.currentlyActive === 'one' ? 'two' : 'one'
+    }, () => {
+      this.startTimer();
+    })
   }
 
   handleClick(which){
-    console.log(which);
-    if (which === 'one'){
-      if (this.state.paused) return;
-      this.stopTimer();
-      this.setState({
-        'currentlyActive' : 'two'
-      }, () => {
-        this.startTimer();
-      })
-    } else if (which === 'two'){
-      if (this.state.paused) return;
-      this.stopTimer();
-      this.setState({
-        'currentlyActive' : 'one'
-      }, () => {
-        this.startTimer();
-      })
-    } else if (which === 'pause'){
+    if (which === 'pause'){
+      if (!this.state.muted){
+        this.pauseSound('ticking');
+      }
       this.stopTimer();
       this.setState({
         'paused' : true
@@ -52,6 +58,9 @@ class App extends Component {
       this.setState({
         'paused' : false
       }, () => {
+        if (!this.state.muted){
+          this.playSound('ticking');
+        }
         this.startTimer();
       })
     } else if (which === 'start'){
@@ -60,6 +69,10 @@ class App extends Component {
         'inProgress' : true,
         'paused' : false
       }, () => {
+        if (!this.state.muted){
+          this.playSound('ticking');
+        }
+
         this.startTimer();
       })
     }
@@ -87,7 +100,10 @@ class App extends Component {
   }
 
   timerEnded(){
-    alert('Timer Ended! ' + this.state.currentlyActive + ' lost!');
+    if (!this.state.muted){
+      this.pauseSound('ticking');
+      this.playSound('whistle');
+    }
     this.stopTimer();
     this.setState({
       'inProgress' : false,
@@ -116,6 +132,16 @@ class App extends Component {
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
 
+  playSound(id){
+    let audio = document.getElementById(`audio_${id}`);
+    audio.currentTime = 0;
+    audio.play();
+  }
+  pauseSound(id){
+    let audio = document.getElementById(`audio_${id}`);
+    audio.pause();
+  }
+
 
   render() {
     return (
@@ -125,14 +151,14 @@ class App extends Component {
         active = {this.state.currentlyActive === 'one'}
         totalTime = {this.state.timeTotal_one}
         timeRemaining = {this.formatTime(this.state.timeRemaining_one)}
-        onClick = {this.handleClick}
+        onClick = {this.handleHalfClick}
         />
 
         <Half id='two'
         active = {this.state.currentlyActive === 'two'}
         totalTime = {this.state.timeTotal_two}
         timeRemaining = {this.formatTime(this.state.timeRemaining_two)}
-        onClick = {this.handleClick}
+        onClick = {this.handleHalfClick}
         />
 
         <Button 
