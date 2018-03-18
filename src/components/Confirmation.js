@@ -16,8 +16,10 @@ export const Confirmation = ({
   return (
     <div className="confirmation">
       <h1>Cancel the timer?</h1>
-      <div className="button" onClick={handleYes}> Yes </div>
-      <div className="button" onClick={handleNo}> No </div>
+      <div className="confirmation-buttons">
+        <div className="button" onClick={handleYes}> Yes </div>
+        <div className="button" onClick={handleNo}> No </div>
+      </div>
     </div>
   );
 }
