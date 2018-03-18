@@ -11,16 +11,16 @@ class App extends Component {
   constructor(){
     super();
 
-    //Times are in seconds.
+    //Times are in milliseconds.
     this.state = {
       'inProgress' : false,
       'paused' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 300,
-      'timeTotal_two' : 300,
-      'timeRemaining_one' : 300,
-      'timeRemaining_two' : 300,
+      'timeTotal_one' : 3000,
+      'timeTotal_two' : 3000,
+      'timeRemaining_one' : 3000,
+      'timeRemaining_two' : 3000,
       'muted' : false
     }
 
@@ -115,7 +115,7 @@ class App extends Component {
           }
         })
       }
-    }, 1000)
+    }, 100)
   }
 
   stopTimer(){
@@ -153,7 +153,8 @@ class App extends Component {
     })
   }
 
-  formatTime(time){
+  formatTime(millis){
+    let time = Math.floor(millis/10);
     let minutes = Math.floor(time/60);
     let seconds = time%60;
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;

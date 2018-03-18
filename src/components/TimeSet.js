@@ -6,7 +6,7 @@ export const TimeSet = ({
 
  
   function handleSubmit(ev){
-    onSubmit( Math.floor(ev.target.one.value*60), Math.floor(ev.target.two.value*60));
+    onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
   }
 
   return (

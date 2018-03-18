@@ -97,6 +97,7 @@ h1, h2, h3, h4, h5 {
 }
 .timesetter h1 {
   grid-area: title;
+  text-shadow: -2px 1px 0px orange;
 }
 .timesetter form input {
   background: 0;
