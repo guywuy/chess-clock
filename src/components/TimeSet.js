@@ -14,13 +14,13 @@ export const TimeSet = ({
       <form action='' onSubmit={handleSubmit}>
         <h1>Set Times</h1>
         <div>
-          <label htmlFor="timeOne">One</label>
-          <input type='number' name='one' id='timeOne' defaultValue='5' />
+          <label htmlFor="timeOne">White</label>
+          <input type='number' name='one' id='timeOne' min="1" defaultValue='5' />
           <span>mins</span>
         </div>
         <div>
-          <label htmlFor="timeOne">Two</label>
-          <input type='number' name='two' id='timeTwo' defaultValue='5' />
+          <label htmlFor="timeOne">Black</label>
+          <input type='number' name='two' id='timeTwo' min="1" defaultValue='5' />
           <span>mins</span>
         </div>
         <button type='submit' className='button'> Yes </button>

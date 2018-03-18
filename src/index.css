@@ -103,8 +103,10 @@ h1, h2, h3, h4, h5 {
   padding: 1rem;
   line-height: 1.4rem;
   margin-left: 1rem;
+  margin-right: 0.4rem;
   font-size: 4rem;
-  width: 12rem;
+  width: 3em;
+  border: 3px solid orange;
 }
 .timesetter form label {
   font-weight: 500;
@@ -254,5 +256,20 @@ h1, h2, h3, h4, h5 {
   .time-display {
     padding: 1rem;
     font-size: 3rem;
+  }
+  .timesetter form input {
+    padding: 0.6rem;
+    font-size: 2rem;
+  }
+  .button {
+    width: 6rem;
+    height: 3rem;
+    font-size: 1.6rem;
+  }
+  .button--center {
+    left: calc(50% - 3rem);
+    top: calc(50% - 1.5rem);
+    transform: rotate(90deg);
+    box-shadow: 0 0 0 4px white;
   }
 }
