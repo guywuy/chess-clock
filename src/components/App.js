@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import Half from './Half';
 import MuteButton from './MuteButton';
-import Button from './Button';
+import CenterButton from './CenterButton';
 import StopButton from './StopButton';
 import TimeSet from './TimeSet';
+import Confirmation from './Confirmation';
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
     this.state = {
       'inProgress' : false,
       'paused' : false,
+      'showStopGameConfirmation' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
       'timeTotal_one' : 3000,
@@ -24,10 +26,12 @@ class App extends Component {
       'muted' : false
     }
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleCenterButtonClick = this.handleCenterButtonClick.bind(this);
     this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
+    this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
+    this.handleStopCancellation = this.handleStopCancellation.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.endGame = this.endGame.bind(this);
     this.playSound = this.playSound.bind(this);
@@ -64,11 +68,32 @@ class App extends Component {
   }
 
   handleStopClick(){
-    this.pauseSound('ticking');
-    this.endGame();
+    if (!this.state.muted){
+      this.pauseSound('ticking');
+    };
+    this.stopTimer();
+    this.setState({
+      'showStopGameConfirmation': true,
+      'paused' : true
+    });
   }
 
-  handleClick(which){
+  handleStopConfirmation(){
+    this.endGame()
+  }
+
+  handleStopCancellation(){
+    if (!this.state.muted){
+      this.playSound('ticking');
+    }
+    this.startTimer();
+    this.setState({
+      'showStopGameConfirmation': false,
+      'paused' : false
+    });
+  }
+
+  handleCenterButtonClick(which){
     if (which === 'pause'){
       if (!this.state.muted){
         this.pauseSound('ticking');
@@ -136,6 +161,7 @@ class App extends Component {
       'inProgress' : false,
       'paused' : false,
       'timeIsSet' : false,
+      'showStopGameConfirmation' : false,
       'currentlyActive' : 'none',
       'timeRemaining_one' : this.state.timeTotal_one,
       'timeRemaining_two' : this.state.timeTotal_two
@@ -175,34 +201,43 @@ class App extends Component {
     return (
       <div className="app">
 
-        <Half id='one'
-        active = {this.state.currentlyActive === 'one'}
-        totalTime = {this.state.timeTotal_one}
-        timeRemaining = {this.formatTime(this.state.timeRemaining_one)}
-        onClick = {this.handleHalfClick}
+        <Half 
+          id='one'
+          active = {this.state.currentlyActive === 'one'}
+          totalTime = {this.state.timeTotal_one}
+          timeRemaining = {this.formatTime(this.state.timeRemaining_one)}
+          onClick = {this.handleHalfClick}
         />
 
-        <Half id='two'
-        active = {this.state.currentlyActive === 'two'}
-        totalTime = {this.state.timeTotal_two}
-        timeRemaining = {this.formatTime(this.state.timeRemaining_two)}
-        onClick = {this.handleHalfClick}
+        <Half 
+          id='two'
+          active = {this.state.currentlyActive === 'two'}
+          totalTime = {this.state.timeTotal_two}
+          timeRemaining = {this.formatTime(this.state.timeRemaining_two)}
+          onClick = {this.handleHalfClick}
         />
 
         <MuteButton 
-        muted = {this.state.muted}
-        onClick = {this.handleMuteClick} 
+          muted = {this.state.muted}
+          onClick = {this.handleMuteClick} 
         />
 
-        <Button 
-        started = {this.state.inProgress }
-        paused = {this.state.paused}
-        onClick = {this.handleClick}
+        <CenterButton 
+          started = {this.state.inProgress }
+          paused = {this.state.paused}
+          onClick = {this.handleCenterButtonClick}
         />
 
         <StopButton 
-        onClick = {this.handleStopClick} 
+          onClick = {this.handleStopClick} 
         />
+
+        { this.state.showStopGameConfirmation && 
+        <Confirmation 
+          onConfirm={this.handleStopConfirmation}
+          onCancel={this.handleStopCancellation}
+        /> 
+        }
 
         { !this.state.timeIsSet && 
         <TimeSet onSubmit={this.handleTimeSet} />

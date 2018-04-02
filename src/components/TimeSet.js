@@ -10,7 +10,7 @@ export const TimeSet = ({
   }
 
   return (
-    <div className='timesetter'>
+    <div className='overlay timesetter'>
       <form action='' onSubmit={handleSubmit}>
         <h1>Set Times</h1>
         <div>

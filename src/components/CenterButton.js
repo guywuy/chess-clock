@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export const Button = ({
+export const CenterButton = ({
   started,
   paused,
   onClick
@@ -31,4 +31,4 @@ export const Button = ({
 }
 
 
-export default Button;
+export default CenterButton;

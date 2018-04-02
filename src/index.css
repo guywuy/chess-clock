@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5 {
   background: rgb(120, 0, 0);
 }
 #two {
-  background: rgb(0, 0, 120);
+  background: rgb(0, 0, 110);
 }
 #one.active {
   background: red;
@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5 {
   top: calc(50% - 2rem);
 }
 
-.timesetter {
+.overlay {
   position: absolute;
   width: 90%;
   height: 90%;
@@ -80,8 +80,17 @@ h1, h2, h3, h4, h5 {
   top: 5%;
   text-align: center;
   background: ivory;
-  font-size: 1.4rem;
   border-radius: 2rem;
+  box-shadow: 0px 0px 0px 10px orange;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timesetter {
+  font-size: 1.4rem;
 }
 .timesetter form {
   display: grid;
@@ -110,7 +119,8 @@ h1, h2, h3, h4, h5 {
   border: 3px solid orange;
 }
 .timesetter form label {
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .timesetter form span {
   font-size: 1rem;
@@ -128,14 +138,14 @@ h1, h2, h3, h4, h5 {
   width: 60px;
   height: 60px;
   background: white;
+  color: white;
+  text-align: center;
 }
 
-.button--stop-container {
+.button--stop {
   position: absolute;
   left: calc(50% - 30px);
   top: calc(75% - 30px);
-}
-.button--stop {
   cursor: pointer;
   border-radius: 50%;
   width: 60px;
@@ -145,24 +155,17 @@ h1, h2, h3, h4, h5 {
   text-align: center;
 }
 .confirmation {
-  position: absolute;
-  background: white;
-  width: 26rem;
-  text-align: center;
-  border-radius: 1rem;
-  left: calc(-13rem + 30px);
-  top: -6rem;
-  padding: 2rem;
-  box-shadow: 0px 0px 0px 10px orange;
+   
 }
 
 .confirmation h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .confirmation-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+}
+.confirmation-buttons .button {
+  margin: 1rem;
 }
 
 @media (orientation: portrait){
@@ -188,19 +191,20 @@ h1, h2, h3, h4, h5 {
     height: 100%;
     grid-template-rows: 2fr 4fr 4fr 2fr; 
   }
-  .button--stop-container {
+
+  .button--stop {
     left: calc(25% - 30px);
     top: calc(50% - 30px);
   }
+  
   .button--mute {
     left: calc(75% - 30px);
     top: calc(50% - 30px);
   }
   .confirmation {
-    width: 18rem;
-    left: 0;
-    top: -8rem;
+
   }
+
   .confirmation-buttons {
     flex-direction: column;
     align-items: center;
@@ -245,7 +249,7 @@ h1, h2, h3, h4, h5 {
   .button {
     width: 6rem;
     height: 3rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   .button--center {
     left: calc(50% - 3rem);
@@ -265,7 +269,7 @@ h1, h2, h3, h4, h5 {
   .button {
     width: 6rem;
     height: 3rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   .button--center {
     left: calc(50% - 3rem);
