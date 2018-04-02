@@ -4,6 +4,7 @@ import Half from './Half';
 import MuteButton from './MuteButton';
 import CenterButton from './CenterButton';
 import StopButton from './StopButton';
+import RotateButton from './RotateButton';
 import TimeSet from './TimeSet';
 import Confirmation from './Confirmation';
 
@@ -23,12 +24,14 @@ class App extends Component {
       'timeTotal_two' : 3000,
       'timeRemaining_one' : 3000,
       'timeRemaining_two' : 3000,
-      'muted' : false
+      'muted' : false,
+      'rotated' : false
     }
 
     this.handleCenterButtonClick = this.handleCenterButtonClick.bind(this);
     this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
+    this.handleRotateClick = this.handleRotateClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
@@ -65,6 +68,12 @@ class App extends Component {
     this.setState({
       'muted' : !this.state.muted
     })
+  }
+
+  handleRotateClick(){
+    this.setState({
+      'rotated' : !this.state.rotated
+    });
   }
 
   handleStopClick(){
@@ -199,7 +208,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div className={ this.state.rotated ? "app rotated" : "app" }>
 
         <Half 
           id='one'
@@ -217,9 +226,8 @@ class App extends Component {
           onClick = {this.handleHalfClick}
         />
 
-        <MuteButton 
-          muted = {this.state.muted}
-          onClick = {this.handleMuteClick} 
+        <StopButton 
+          onClick = {this.handleStopClick} 
         />
 
         <CenterButton 
@@ -228,8 +236,13 @@ class App extends Component {
           onClick = {this.handleCenterButtonClick}
         />
 
-        <StopButton 
-          onClick = {this.handleStopClick} 
+        <MuteButton 
+          muted = {this.state.muted}
+          onClick = {this.handleMuteClick} 
+        />
+        
+        <RotateButton 
+          onClick = {this.handleRotateClick} 
         />
 
         { this.state.showStopGameConfirmation && 
