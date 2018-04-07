@@ -1,4 +1,10 @@
 :root {
+    --color-primary: rgb(186, 86, 36);
+    --color-neutral-1: rgb(255, 230, 175);
+    --color-light: #e4e4e4;
+    --color-dark: #230614;
+    --color-mid: #ffa552;
+
     --aux-button-width: 66px;
     --aux-button-center-width: 60px;
     --aux-button-half: 30px;
@@ -9,10 +15,13 @@
     --button-width-half: 80px;
     --button-height-half: 30px;
     --button-font-size: 2rem;
-    --button-box-shadow: 0 0 0 10px white;
+    --button-shadow-size: 10px;
+    --button-shadow: 0 0 0 var(--button-shadow-size) white;
 
     --time-display-one-transform: rotate(90deg);
     --time-display-two-transform: rotate(-90deg);
+
+
 }
 
 .app.rotated {
@@ -23,7 +32,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Helvetica', sans-serif;
+  color: var(--color-dark);
 }
 html, * {
   box-sizing: border-box;
@@ -40,23 +50,11 @@ h1, h2, h3, h4, h5 {
   padding: 0;
 }
 
-#one {
-  background: rgb(120, 0, 0);
-}
-#two {
-  background: rgb(0, 0, 110);
-}
-#one.active {
-  background: red;
-}
-#two.active {
-  background: blue;
-}
-
 .half {
   display: grid;
   justify-content: center;
   align-content: center;
+  cursor: pointer;
 }
 
 .time-display {
@@ -65,7 +63,7 @@ h1, h2, h3, h4, h5 {
   background-color: rgba(200, 200, 200, 0.9);
   border-radius: 1rem;
   display: inline-block;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Roboto Mono', monospace;
 }
 #one .time-display {
   background: white;
@@ -87,7 +85,7 @@ h1, h2, h3, h4, h5 {
   text-align: center;
   background: ivory;
   border-radius: 2rem;
-  box-shadow: 0px 0px 0px 10px orange;
+  box-shadow: 0px 0px 0px 10px var(--color-mid);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -110,12 +108,15 @@ h1, h2, h3, h4, h5 {
   grid-gap: 1rem;
   justify-items: center;
   align-items: center;
+  width: 100%;
   height: 100%;
   grid-template-rows: 3fr 5fr 3fr;
+  color: var(--color-dark);
 }
 .timesetter h1 {
   grid-area: title;
-  text-shadow: -2px 1px 0px orange;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 .timesetter form input {
   background: 0;
@@ -125,7 +126,7 @@ h1, h2, h3, h4, h5 {
   margin-right: 0.4rem;
   font-size: 4rem;
   width: 3em;
-  border: 3px solid orange;
+  border: 3px solid var(--color-mid);
 }
 .timesetter form label {
   font-weight: 700;
@@ -141,27 +142,28 @@ h1, h2, h3, h4, h5 {
 /* ---------------- */
 /* BUTTONS */
 /* ---------------- */
+
+.buttons {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .button {
   width: var(--button-width);
   height: var(--button-height);
-  background: orange;
+  background: var(--color-mid);
   font-size: var(--button-font-size);
   font-weight: bold;
   text-align: center;
   line-height: 2;
   cursor: pointer;
   border: 0;
-  box-shadow: var(--button-box-shadow);
-}
-
-.button--center {
-  position: absolute;
-  left: calc(50% - var(--button-width-half));
-  top: calc(50% - var(--button-height-half));
+  box-shadow: var(--button-shadow);
 }
 
 .button--aux {
-  position: absolute;
   cursor: pointer;
   border-radius: 50%;
   width: var(--aux-button-width);
@@ -175,21 +177,6 @@ h1, h2, h3, h4, h5 {
   margin-top: var(--aux-button-margin);
   width: var(--aux-button-center-width);
   height: var(--aux-button-center-width);
-}
-
-.button--stop {
-  left: calc(50% - var(--aux-button-half));
-  top: calc(75% - var(--aux-button-half));
-}
-
-.button--mute {
-  left: calc(50% - var(--aux-button-half));
-  top: calc(25% - var(--aux-button-half));
-}  
-
-.button--rotate {
-  left: calc(50% - var(--aux-button-half));
-  top: calc(var(--aux-button) - var(--aux-button-half));
 }
 
 .confirmation h1 {
@@ -210,40 +197,94 @@ h1, h2, h3, h4, h5 {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
   }
+
+  .app.rotated {
+    --button-width: 110px;
+    --button-height: 40px;
+    --button-width-half: 55px;
+    --button-height-half: 20px;
+    --button-font-size: 1.4rem;
+    --button-shadow-size: 4px;  
+  }
+
+  .buttons {
+    width: 110px;
+    height: 100%;
+    flex-direction: column;
+    left: calc(50% - 55px);
+  }
+  .app.rotated .button--center {
+    transform: rotate(90deg);
+  }
+}
+
+@media (orientation: landscape) and (max-width: 1040px) {
+
+  .time-display {
+    padding: 2rem;
+    font-size: 4rem;
+  }
+
 }
 
 @media (orientation: landscape) and (max-width: 840px) {
   :root {
-    --aux-button-width: 56px;
-    --aux-button-center-width: 50px;
-    --aux-button-half: 25px;
+    --aux-button-width: 50px;
+    --aux-button-center-width: 44px;
+    --aux-button-half: 22px;
 
     --button-width: 110px;
     --button-height: 40px;
     --button-width-half: 55px;
     --button-height-half: 20px;
     --button-font-size: 1.4rem;
-    --button-box-shadow: 0 0 0 4px white;
+    --button-shadow-size: 4px;
   }
 
   .time-display {
     padding: 1.4rem;
     font-size: 3.2rem;
   }
+
+  .timesetter form input {
+    padding: 0.6rem;
+    font-size: 2rem;
+  }
+
+  .timesetter form label {
+    font-size: 1rem;
+  }
+
+  .button--aux span {
+    display: none;
+  }
 }
 
 @media (orientation: landscape) and (max-width: 620px) {
   :root {
+    --aux-button-width: 40px;
+    --aux-button-center-width: 34px;
+    --aux-button-half: 17px;
+
+    --button-width: 90px;
+    --button-height: 32px;
+    --button-width-half: 45px;
+    --button-height-half: 16px;
+    --button-font-size: 1rem;
+  }
+
+  .app.rotated {
     --aux-button-width: 46px;
     --aux-button-center-width: 40px;
     --aux-button-half: 20px;
 
-    --button-width: 100px;
-    --button-height: 36px;
-    --button-width-half: 50px;
-    --button-height-half: 18px;
-    --button-font-size: 1.2rem;
+    --button-width: 90px;
+    --button-height: 32px;
+    --button-width-half: 45px;
+    --button-height-half: 16px;
+    --button-font-size: 1rem;
   }
+  
 
   .time-display {
     font-size: 2rem;
@@ -261,6 +302,16 @@ h1, h2, h3, h4, h5 {
   .app.rotated {
     --time-display-one-transform: rotate(90deg);
     --time-display-two-transform: rotate(90deg);
+  }
+
+  .buttons {
+    width: 100%;
+    height: 66px;
+    top: calc(50% - 33px);
+  }
+
+  .app.rotated .button--center {
+    transform: rotate(0);
   }
 
   .app {
@@ -281,21 +332,6 @@ h1, h2, h3, h4, h5 {
     grid-template-rows: 2fr 4fr 4fr 2fr; 
   }
 
-  .button--stop {
-    left: calc(25% - var(--aux-button-half));
-    top: calc(50% - var(--aux-button-half));
-  }
-  
-  .button--rotate {
-    left: calc(var(--aux-button) - var(--aux-button-half));
-    top: calc(50% - var(--aux-button-half));
-  }
-
-  .button--mute {
-    left: calc(75% - var(--aux-button-half));
-    top: calc(50% - var(--aux-button-half));
-  }
-
   .confirmation-buttons {
     flex-direction: column;
     align-items: center;
@@ -305,18 +341,27 @@ h1, h2, h3, h4, h5 {
   }
 }
 
+@media (orientation: portrait) and (max-height: 1040px) {
+
+  .time-display {
+    padding: 2rem;
+    font-size: 4rem;
+  }
+
+}
+
 @media (orientation: portrait) and (max-height: 840px){
   :root {
-    --aux-button-width: 56px;
-    --aux-button-center-width: 50px;
-    --aux-button-half: 25px;
+    --aux-button-width: 50px;
+    --aux-button-center-width: 44px;
+    --aux-button-half: 22px;
 
     --button-width: 110px;
     --button-height: 40px;
     --button-width-half: 55px;
     --button-height-half: 20px;
     --button-font-size: 1.4rem;
-    --button-box-shadow: 0 0 0 4px white;
+    --button-shadow-size: 4px;
   }
 
   .time-display {
@@ -328,24 +373,32 @@ h1, h2, h3, h4, h5 {
     padding: 0.6rem;
     font-size: 2rem;
   }
+
+  .timesetter form label {
+    font-size: 1rem;
+  }
   
   .button--center {
     transform: rotate(90deg);
+  }
+
+  .button--aux span {
+    display: none;
   }
 }
 
 @media (orientation: portrait) and (max-height: 460px){
   :root {
-    --aux-button-width: 46px;
-    --aux-button-center-width: 40px;
-    --aux-button-half: 20px;
+    --aux-button-width: 40px;
+    --aux-button-center-width: 34px;
+    --aux-button-half: 17px;
 
     --button-width: 100px;
     --button-height: 36px;
     --button-width-half: 50px;
     --button-height-half: 18px;
     --button-font-size: 1.2rem;
-    --button-box-shadow: 0 0 0 4px white;
+    --button-shadow-size: 4px;
   }
 
   .time-display {

@@ -215,6 +215,7 @@ class App extends Component {
           active = {this.state.currentlyActive === 'one'}
           totalTime = {this.state.timeTotal_one}
           timeRemaining = {this.formatTime(this.state.timeRemaining_one)}
+          percentComplete = {100 - (this.state.timeRemaining_one*100 / this.state.timeTotal_one).toFixed(1)}
           onClick = {this.handleHalfClick}
         />
 
@@ -223,27 +224,32 @@ class App extends Component {
           active = {this.state.currentlyActive === 'two'}
           totalTime = {this.state.timeTotal_two}
           timeRemaining = {this.formatTime(this.state.timeRemaining_two)}
+          percentComplete = {100 - (this.state.timeRemaining_two*100 / this.state.timeTotal_two).toFixed(1)}
           onClick = {this.handleHalfClick}
         />
 
-        <StopButton 
-          onClick = {this.handleStopClick} 
-        />
+        <div className="buttons">
 
-        <CenterButton 
-          started = {this.state.inProgress }
-          paused = {this.state.paused}
-          onClick = {this.handleCenterButtonClick}
-        />
+          <StopButton 
+            onClick = {this.handleStopClick} 
+          />
 
-        <MuteButton 
-          muted = {this.state.muted}
-          onClick = {this.handleMuteClick} 
-        />
-        
-        <RotateButton 
-          onClick = {this.handleRotateClick} 
-        />
+          <CenterButton 
+            started = {this.state.inProgress }
+            paused = {this.state.paused}
+            onClick = {this.handleCenterButtonClick}
+          />
+
+          <MuteButton 
+            muted = {this.state.muted}
+            onClick = {this.handleMuteClick} 
+          />
+          
+          <RotateButton 
+            onClick = {this.handleRotateClick} 
+          />
+
+        </div>
 
         { this.state.showStopGameConfirmation && 
         <Confirmation 
