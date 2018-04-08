@@ -15,12 +15,12 @@ export const TimeSet = ({
         <h1>Set Times</h1>
         <div>
           <label htmlFor="timeOne">White</label>
-          <input type='number' name='one' id='timeOne' min="1" max="60" defaultValue='5' />
+          <input type='number' name='one' id='timeOne' min="0.5" max="60" step="0.5" defaultValue='5' />
           <span>mins</span>
         </div>
         <div>
           <label htmlFor="timeOne">Black</label>
-          <input type='number' name='two' id='timeTwo' min="1" max="60" defaultValue='5' />
+          <input type='number' name='two' id='timeTwo' min="0.5" max="60" step="0.5" defaultValue='5' />
           <span>mins</span>
         </div>
         <button type='submit' className='button'> Yes </button>

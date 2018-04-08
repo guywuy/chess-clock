@@ -21,10 +21,10 @@ class App extends Component {
       'showGameOverText' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 3000,
-      'timeTotal_two' : 3000,
-      'timeRemaining_one' : 3000,
-      'timeRemaining_two' : 3000,
+      'timeTotal_one' : 6000,
+      'timeTotal_two' : 6000,
+      'timeRemaining_one' : 6000,
+      'timeRemaining_two' : 6000,
       'muted' : false,
       'rotated' : false
     }
@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   handleStopConfirmation(){
-    this.endGame()
+    this.resetAndStartGame();
   }
 
   handleStopCancellation(){
@@ -277,7 +277,8 @@ class App extends Component {
 
         { this.state.showGameOverText &&
           <svg xmlns="http://www.w3.org/2000/svg" className="game-over-text">
-            <text x="50%" y="50%" fill="#fff" stroke="#333" strokeWidth="8" onClick={ this.resetAndStartGame }>OUT OF TIME</text>
+            <text x="50%" y="45%" textAnchor="middle" fill="#fff" stroke="#333" strokeWidth="2" onClick={ this.resetAndStartGame } className="game-over-text__title">TIME UP!</text>
+            <text x="50%" y="70%" textAnchor="middle" fill="#fff" stroke="#333" strokeWidth="1" onClick={ this.resetAndStartGame } className="game-over-text__subtitle">Play again?</text>
           </svg>
         }
 

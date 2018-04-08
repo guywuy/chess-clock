@@ -39,7 +39,7 @@ export const Half = ({
       onClick={handleClick} 
       style={getGradient()
     }>
-      <div className={ timeRemaining <= 1 ? "time-display flashing" : "time-display" }>
+      <div className={ percentComplete >= 90 && active ? "time-display flashing" : "time-display" }>
         <h1>{timeRemaining}</h1>
       </div>
     </div>
