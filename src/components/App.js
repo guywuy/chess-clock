@@ -18,6 +18,7 @@ class App extends Component {
       'inProgress' : false,
       'paused' : false,
       'showStopGameConfirmation' : false,
+      'showGameOverText' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
       'timeTotal_one' : 3000,
@@ -37,6 +38,7 @@ class App extends Component {
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.endGame = this.endGame.bind(this);
+    this.resetAndStartGame = this.resetAndStartGame.bind(this);
     this.playSound = this.playSound.bind(this);
     this.pauseSound = this.pauseSound.bind(this);
   }
@@ -169,11 +171,22 @@ class App extends Component {
     this.setState({
       'inProgress' : false,
       'paused' : false,
+      'showStopGameConfirmation' : false,
+      'showGameOverText' : true
+    })
+  }
+
+  resetAndStartGame(){
+    this.stopTimer();
+    this.setState({
+      'inProgress' : false,
+      'paused' : false,
       'timeIsSet' : false,
       'showStopGameConfirmation' : false,
       'currentlyActive' : 'none',
       'timeRemaining_one' : this.state.timeTotal_one,
-      'timeRemaining_two' : this.state.timeTotal_two
+      'timeRemaining_two' : this.state.timeTotal_two,
+      'showGameOverText' : false
     })
   }
 
@@ -228,7 +241,7 @@ class App extends Component {
           onClick = {this.handleHalfClick}
         />
 
-        <div className="buttons">
+        <div className={ this.state.paused && !this.state.showStopGameConfirmation ? 'buttons highlight' : 'buttons' }>
 
           <StopButton 
             onClick = {this.handleStopClick} 
@@ -260,6 +273,12 @@ class App extends Component {
 
         { !this.state.timeIsSet && 
         <TimeSet onSubmit={this.handleTimeSet} />
+        }
+
+        { this.state.showGameOverText &&
+          <svg xmlns="http://www.w3.org/2000/svg" className="game-over-text">
+            <text x="50%" y="50%" fill="#fff" stroke="#333" strokeWidth="8" onClick={ this.resetAndStartGame }>OUT OF TIME</text>
+          </svg>
         }
 
       </div>

@@ -33,8 +33,13 @@ export const Half = ({
   }
 
   return (
-    <div className={`half ${active ? 'active' : ''}`} id={id} onClick={handleClick} style={getGradient()}>
-      <div className="time-display">
+    <div 
+      className={active ? 'half active' : 'half'} 
+      id={id} 
+      onClick={handleClick} 
+      style={getGradient()
+    }>
+      <div className={ timeRemaining <= 1 ? "time-display flashing" : "time-display" }>
         <h1>{timeRemaining}</h1>
       </div>
     </div>
