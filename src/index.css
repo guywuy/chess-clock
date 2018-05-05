@@ -470,7 +470,9 @@ h1, h2, h3, h4, h5 {
 }
 
 
-
+/* ---------------- */
+/* ANIMATION */
+/* ---------------- */
 @-webkit-keyframes appear {
   100% {
     opacity: 1;
