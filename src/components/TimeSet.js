@@ -21,19 +21,24 @@ export const TimeSet = ({
         <h1>Set Times</h1>
 
         <div className="timesetter__mode-selector">
-          <label>
-            Standard
-            <input type='radio' value='standard'   name="mode" checked={mode==='standard'} onChange={handleModeChange} /> 
+          <div className={`timesetter__mode-selector--one ${mode==='standard' ? 'timesetter__mode-selector--active' : ''}`}>
+            <label>
+            Standard Mode
+              <input type='radio' value='standard'   name="mode" checked={mode==='standard'} onChange={handleModeChange} /> 
+            </label>
             <br/>
             <span>Time decreases normally</span>
-          </label>
-          <label>
-            Hourglass
-            <input type='radio' value='hourglass'   name="mode" checked={mode==='hourglass'} onChange={handleModeChange} />
+          </div>
+          <div className={`timesetter__mode-selector--two ${mode==='hourglass' ? 'timesetter__mode-selector--active' : ''}`}>
+            <label>
+              Hourglass Mode
+              <input type='radio' value='hourglass'   name="mode" checked={mode==='hourglass'} onChange={handleModeChange} />
+            </label>
             <br/>
             <span>Time is added to the inactive player</span>
-          </label>
+          </div>
         </div>
+        
         <div className="timesetter__time-input timesetter__time-input--one">
           <label htmlFor="timeOne">White</label>
           <input type='number' name='one' id='timeOne' min="0.5" max="60" step="0.5" defaultValue="4" />

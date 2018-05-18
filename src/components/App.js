@@ -218,12 +218,6 @@ class App extends Component {
     this.setState({
       'mode' : selectedMode
       })
-    
-    // this.setState((prevState)=>{
-    //   return {
-    //     'mode' : prevState.mode === 'standard' ? 'hourglass' : 'standard',
-    //   }
-    // })
   }
 
   handleTimeSet(one, two){
@@ -259,6 +253,7 @@ class App extends Component {
     return (
       <div className={ this.state.rotated ? "app rotated" : "app" }>
 
+        { this.state.timeIsSet && 
         <Half 
           id='one'
           active = {this.state.currentlyActive === 'one'}
@@ -267,7 +262,9 @@ class App extends Component {
           percentComplete = {100 - (this.state.timeRemaining_one*100 / this.state.timeTotal_one).toFixed(1)}
           onClick = {this.handleHalfClick}
         />
+        }
 
+        { this.state.timeIsSet && 
         <Half 
           id='two'
           active = {this.state.currentlyActive === 'two'}
@@ -276,6 +273,7 @@ class App extends Component {
           percentComplete = {100 - (this.state.timeRemaining_two*100 / this.state.timeTotal_two).toFixed(1)}
           onClick = {this.handleHalfClick}
         />
+        }
 
         <div className={ this.state.paused && !this.state.showStopGameConfirmation ? 'buttons highlight' : 'buttons' }>
 
