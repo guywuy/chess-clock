@@ -25,7 +25,7 @@ class App extends Component {
       'timeTotal_two' : 6000,
       'timeRemaining_one' : 6000,
       'timeRemaining_two' : 6000,
-      'muted' : false,
+      'muted' : true,
       'rotated' : false
     }
 
