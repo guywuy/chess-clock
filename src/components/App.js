@@ -25,6 +25,7 @@ class App extends Component {
       'timeTotal_two' : 6000,
       'timeRemaining_one' : 6000,
       'timeRemaining_two' : 6000,
+      'mode' : 'standard',
       'muted' : true,
       'rotated' : false
     }
@@ -36,6 +37,7 @@ class App extends Component {
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
+    this.handleModeChange = this.handleModeChange.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.endGame = this.endGame.bind(this);
     this.resetAndStartGame = this.resetAndStartGame.bind(this);
@@ -105,8 +107,10 @@ class App extends Component {
   }
 
   handleCenterButtonClick(which){
+    let muted = this.state.muted;
+
     if (which === 'pause'){
-      if (!this.state.muted){
+      if (!muted){
         this.pauseSound('ticking');
       }
       this.stopTimer();
@@ -117,7 +121,7 @@ class App extends Component {
       this.setState({
         'paused' : false
       }, () => {
-        if (!this.state.muted){
+        if (!muted){
           this.playSound('ticking');
         }
         this.startTimer();
@@ -128,7 +132,7 @@ class App extends Component {
         'inProgress' : true,
         'paused' : false
       }, () => {
-        if (!this.state.muted){
+        if (!muted){
           this.playSound('ticking');
         }
 
@@ -138,18 +142,38 @@ class App extends Component {
   }
 
   startTimer(){
+
+    // Currently active
     let current = this.state.currentlyActive;
     let tr = `timeRemaining_${current}`;
+    
+    // Not active (used in hourglass mode)
+    let inactive = current === 'one' ? 'two' : 'one';
+    let trInactive = `timeRemaining_${inactive}`;
 
     this.intervalTimer = setInterval(()=>{
+      // If timeRemaining has ran out, end game
       if (this.state[tr]<=0){
         this.timerEnded()
       } else {
-        this.setState((prevState)=>{
-          return {
-            [tr] : --prevState[tr]
-          }
-        })
+
+        // If game is standard mode
+        if (this.state.mode === 'standard'){
+          this.setState((prevState)=>{
+            return {
+              [tr] : --prevState[tr]
+            }
+          })
+        } else {
+          // If game is hourglass mode, add time to time remaining for inactive
+          this.setState((prevState)=>{
+            return {
+              [tr] : --prevState[tr],
+              [trInactive] : ++prevState[trInactive]
+            }
+          })
+        }
+
       }
     }, 100)
   }
@@ -188,6 +212,18 @@ class App extends Component {
       'timeRemaining_two' : this.state.timeTotal_two,
       'showGameOverText' : false
     })
+  }
+
+  handleModeChange(selectedMode){
+    this.setState({
+      'mode' : selectedMode
+      })
+    
+    // this.setState((prevState)=>{
+    //   return {
+    //     'mode' : prevState.mode === 'standard' ? 'hourglass' : 'standard',
+    //   }
+    // })
   }
 
   handleTimeSet(one, two){
@@ -272,7 +308,7 @@ class App extends Component {
         }
 
         { !this.state.timeIsSet && 
-        <TimeSet onSubmit={this.handleTimeSet} />
+        <TimeSet onSubmit={this.handleTimeSet} onHandleModeChange={this.handleModeChange} mode={this.state.mode} />
         }
 
         { this.state.showGameOverText &&

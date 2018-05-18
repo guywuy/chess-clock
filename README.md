@@ -11,5 +11,5 @@ Pause button in the middle to pause both countdowns.
 
 ### Todo
 - Improve timeset screen to have hours and minutes
-- Feature - hourglass mode - each player starts with a minute - while your time goes down opponent's increases and vice versa.
+- Style Mode section of timeset screen
 - Other mode - simple 30 second per turn timer which resets each move.
