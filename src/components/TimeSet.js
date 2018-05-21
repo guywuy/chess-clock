@@ -1,4 +1,5 @@
 import React from 'react';
+import RadioItem from './form-elements/RadioItem.js';
 
 export const TimeSet = ({
   onSubmit,
@@ -6,9 +7,9 @@ export const TimeSet = ({
   mode
 }) => {
   
-  function handleModeChange(ev){
-    onHandleModeChange(ev.target.value);
-  }
+  // function handleModeChange(value){
+  //   onHandleModeChange(ev.target.value);
+  // }
 
   function handleSubmit(ev){
     onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
@@ -21,22 +22,24 @@ export const TimeSet = ({
         <h1>Set Times</h1>
 
         <div className="timesetter__mode-selector">
-          <div className={`timesetter__mode-selector--one ${mode==='standard' ? 'timesetter__mode-selector--active' : ''}`}>
-            <label>
-            Standard Mode
-              <input type='radio' value='standard'   name="mode" checked={mode==='standard'} onChange={handleModeChange} /> 
-            </label>
-            <br/>
-            <span>Time decreases normally</span>
-          </div>
-          <div className={`timesetter__mode-selector--two ${mode==='hourglass' ? 'timesetter__mode-selector--active' : ''}`}>
-            <label>
-              Hourglass Mode
-              <input type='radio' value='hourglass'   name="mode" checked={mode==='hourglass'} onChange={handleModeChange} />
-            </label>
-            <br/>
-            <span>Time is added to the inactive player</span>
-          </div>
+          <RadioItem
+          className={`timesetter__mode-selector--one ${mode==='standard' ? 'timesetter__mode-selector--active' : ''}`}
+          value="standard"
+          name="mode"
+          handleChange={onHandleModeChange}
+          label="Standard Mode"
+          description="Time decreases normally"
+          checked={mode==='standard'}
+          />
+          <RadioItem
+          className={`timesetter__mode-selector--two ${mode==='hourglass' ? 'timesetter__mode-selector--active' : ''}`}
+          value="hourglass"
+          name="mode"
+          handleChange={onHandleModeChange}
+          label="Hourglass Mode"
+          description="Time is added to the inactive player"
+          checked={mode==='hourglass'}
+          />
         </div>
         
         <div className="timesetter__time-input timesetter__time-input--one">
