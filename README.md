@@ -11,7 +11,7 @@
 
 
 ### Todo
-- Show mode selection screen _before_ time input screen (to be able to fit both on screen and make selection process clearer)
+- Add back button to timeset screen
 - Improve timeset input - have hours, minutes and seconds.
 
 

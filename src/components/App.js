@@ -5,6 +5,7 @@ import MuteButton from './MuteButton';
 import CenterButton from './CenterButton';
 import StopButton from './StopButton';
 import RotateButton from './RotateButton';
+import ModeSet from './ModeSet';
 import TimeSet from './TimeSet';
 import Confirmation from './Confirmation';
 
@@ -19,6 +20,7 @@ class App extends Component {
       'paused' : false,
       'showStopGameConfirmation' : false,
       'showGameOverText' : false,
+      'modeIsSet' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
       'timeTotal_one' : 6000,
@@ -38,6 +40,7 @@ class App extends Component {
     this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
+    this.handleModeSet = this.handleModeSet.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.endGame = this.endGame.bind(this);
     this.resetAndStartGame = this.resetAndStartGame.bind(this);
@@ -218,6 +221,7 @@ class App extends Component {
     this.setState({
       'inProgress' : false,
       'paused' : false,
+      'modeIsSet' : false,
       'timeIsSet' : false,
       'showStopGameConfirmation' : false,
       'currentlyActive' : 'none',
@@ -227,14 +231,13 @@ class App extends Component {
     })
   }
 
-  handleModeChange(selectedMode){
+  handleModeSet(){  
     this.setState({
-      'mode' : selectedMode
-      })
+      'modeIsSet' : true,
+    })
   }
 
-  handleTimeSet(one, two){
-   
+  handleTimeSet(one, two){  
     this.setState({
       'timeIsSet' : true,
       'timeTotal_one' : one,
@@ -242,6 +245,12 @@ class App extends Component {
       'timeRemaining_one' : one,
       'timeRemaining_two' : two
     })
+  }
+
+  handleModeChange(selectedMode){
+    this.setState({
+      'mode' : selectedMode
+      })
   }
 
   formatTime(millis){
@@ -318,8 +327,12 @@ class App extends Component {
         /> 
         }
 
-        { !this.state.timeIsSet && 
-        <TimeSet onSubmit={this.handleTimeSet} onHandleModeChange={this.handleModeChange} mode={this.state.mode} />
+        { !this.state.modeIsSet && 
+        <ModeSet onSubmit={this.handleModeSet} onHandleModeChange={this.handleModeChange} mode={this.state.mode} />
+        }
+
+        { this.state.modeIsSet && !this.state.timeIsSet && 
+        <TimeSet onSubmit={this.handleTimeSet} mode={this.state.mode} />
         }
 
         { this.state.showGameOverText &&

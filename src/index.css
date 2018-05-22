@@ -121,15 +121,14 @@ h1, h2, h3, h4, h5 {
   display: grid;
   grid-template-areas: 
   'title title'
-  'mode timeone'
-  'mode timetwo'
+  'options options'
   'submit submit';
   grid-gap: 1rem;
   justify-items: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  grid-template-rows: 2fr 2fr 5fr 3fr;
+  grid-template-rows: 2fr 5fr 2fr;
   color: var(--color-dark);
 }
 .timesetter h1 {
@@ -137,18 +136,20 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
   text-transform: uppercase;
 }
-.timesetter__mode-selector {
-  grid-area: mode;
+.timesetter__options-selector {
+  grid-area: options;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-self: stretch; 
+  justify-content: space-around;
+  justify-self: stretch; 
+}
+.timesetter__mode-radio {
+  flex: 1 0 0;
 }
 .timesetter__mode-radio label {
   display: inline-block;
-  text-align: left;
+  text-align: center;
   border: 2px solid var(--color-neutral);
-  padding: 1rem;
+  padding: 3rem 1rem;
   margin: 2px;
   cursor: pointer;
 }
@@ -160,12 +161,6 @@ h1, h2, h3, h4, h5 {
 }
 .timesetter__mode-radio input {
   display: none;
-}
-.timesetter__time-input--one {
-  grid-area: timeone
-}
-.timesetter__time-input--two {
-  grid-area: timetwo
 }
 .timesetter form input[type=number] {
   background: 0;
@@ -335,6 +330,10 @@ h1, h2, h3, h4, h5 {
     font-size: 3.2rem;
   }
 
+  .timesetter__mode-radio label {
+    padding: 1rem;
+  }
+
   .timesetter form input[type=number] {
     padding: 0.6rem;
     font-size: 2rem;
@@ -378,7 +377,7 @@ h1, h2, h3, h4, h5 {
     font-size: 2rem;
   }
 
-  .timesetter__mode-selector span {
+  .timesetter__options-selector span {
     display: none;
   }
   .timesetter h1 {
@@ -417,16 +416,22 @@ h1, h2, h3, h4, h5 {
   .timesetter form {
     grid-template-areas: 
     'title'
-    'mode'
-    'mode'
-    'timeone'
-    'timetwo'
+    'options'
     'submit';
     grid-gap: 1rem;
     justify-items: center;
     align-items: center;
     height: 100%;
-    grid-template-rows: 2fr 2fr 2fr 2fr 2fr 2fr; 
+    grid-template-rows: 1fr 4fr 1fr; 
+  }
+
+  .timesetter__options-selector {
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .timesetter__mode-radio label {
+    padding: 1.6rem 1rem;
   }
 
   .confirmation-buttons {
@@ -474,8 +479,8 @@ h1, h2, h3, h4, h5 {
     font-size: 3.2rem;
   }
 
-  .timesetter__mode-selector span {
-    display: none;
+  .timesetter__mode-radio label {
+    padding: 1rem;
   }
 
   .timesetter form input[type=number] {
@@ -513,6 +518,10 @@ h1, h2, h3, h4, h5 {
   .time-display {
     padding: 1rem;
     font-size: 3rem;
+  }
+
+  .timesetter__options-selector span {
+    display: none;
   }
 
   .button--center {
