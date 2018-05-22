@@ -6,15 +6,10 @@ export const TimeSet = ({
   onHandleModeChange,
   mode
 }) => {
-  
-  // function handleModeChange(value){
-  //   onHandleModeChange(ev.target.value);
-  // }
 
   function handleSubmit(ev){
     onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
   }
-
 
   return (
     <div className='overlay timesetter'>

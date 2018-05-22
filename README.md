@@ -1,7 +1,7 @@
 # Chess clock web app.
 
 ## Features
-- Three modes - standard, hourglass and per move.
+- [Three modes](#modes) - standard, hourglass and per move.
 - Select time limit for each player.
 - Time remaining is shown on each half.
 - Tap/click your half to switch countdown to other player.
@@ -13,3 +13,14 @@
 ### Todo
 - Show mode selection screen _before_ time input screen (to be able to fit both on screen and make selection process clearer)
 - Improve timeset input - have hours, minutes and seconds.
+
+
+# Modes
+1. __Standard__  
+  Each player has a finite amount of time which decreases when it is their turn to move.
+
+2. __Hourglass__  
+  Each player has time which decreases when it is their turn but increases when it is the other player's turn.
+
+3. __Per Move__  
+  Each player has a finite amount of time to move which is reset each move
