@@ -3,10 +3,10 @@
     --color-primary--alpha: rgba(120, 0, 0, 0.5);
     --color-neutral: rgb(255, 230, 175);
     --color-neutral--alpha: rgba(255, 230, 175, 0.5);
-    --color-blue: #5fa09d;
+    --color-green: #688E26;
     --color-light: #e4e4e4;
     --color-dark: #230614;
-    --color-mid: #ffa552;
+    --color-mid: rgb(255, 165, 82);
 
     --body-font: 'Poiret One', sans-serif;
 
@@ -200,8 +200,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .buttons.highlight {
-  box-shadow: 0 0 100vw 20vw rgba(0, 0, 0, 0.6);
-  background: var(--color-blue);
+  box-shadow: 0 0 6vw 6vw rgba(0, 0, 0, 0.6);
+  background: var(--color-green);
 }
 
 .button {
@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
 }
 .game-over-text text {
-  stroke: var(--color-blue);
+  stroke: var(--color-green);
   text-shadow: 2px 2px var(--color-primary);
   transform-origin: center;
 }
