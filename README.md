@@ -1,15 +1,15 @@
 # Chess clock web app.
 
-Able to select a time limit for each player.
-Time remaining for each is displayed on one half of screen, and touching your half of screen transfers countdown to other player.
-Time left reflected in big time display.
-Pause button in the middle to pause both countdowns.
-
-
+## Features
+- Three modes - standard, hourglass and per move.
+- Select time limit for each player.
+- Time remaining is shown on each half.
+- Tap/click your half to switch countdown to other player.
+- Pause and cancel buttons.
+- Switch display orientation option.
 
 
 
 ### Todo
-- Improve timeset screen to have hours and minutes
-- Style Mode section of timeset screen
-- Other mode - simple 30 second per turn timer which resets each move.
+- Show mode selection screen _before_ time input screen (to be able to fit both on screen and make selection process clearer)
+- Improve timeset input - have hours, minutes and seconds.

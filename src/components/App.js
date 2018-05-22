@@ -160,19 +160,29 @@ class App extends Component {
         this.timerEnded()
       } else {
 
-        // If game is standard mode
+        // LOGIC DEPENDING ON GAME MODE
         if (this.state.mode === 'standard'){
+          // If game is standard mode
           this.setState((prevState)=>{
             return {
               [tr] : --prevState[tr]
             }
           })
-        } else {
+        } else if (this.state.mode === 'hourglass'){
           // If game is hourglass mode, add time to time remaining for inactive
           this.setState((prevState)=>{
             return {
               [tr] : --prevState[tr],
               [trInactive] : ++prevState[trInactive]
+            }
+          })
+        } else {
+          // If game is permove mode, add time to time remaining for inactive
+          let timeTotalInactive = `timeTotal_${inactive}`;
+          this.setState((prevState)=>{
+            return {
+              [tr] : --prevState[tr],
+              [trInactive] : prevState[timeTotalInactive]
             }
           })
         }
