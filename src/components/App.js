@@ -43,6 +43,9 @@ class App extends Component {
     this.resetAndStartGame = this.resetAndStartGame.bind(this);
     this.playSound = this.playSound.bind(this);
     this.pauseSound = this.pauseSound.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
+    this.timerEnded = this.timerEnded.bind(this);
   }
 
   handleHalfClick(){
@@ -232,7 +235,7 @@ class App extends Component {
   }
 
   formatTime(millis){
-    let time = Math.floor(millis/10);
+    let time = Math.round(millis/10);
     let minutes = Math.floor(time/60);
     let seconds = time%60;
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
