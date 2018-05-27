@@ -160,7 +160,8 @@ h1, h2, h3, h4, h5 {
   background: var(--color-neutral--alpha);
 }
 .timesetter__mode-radio input {
-  display: none;
+  /* display: none; */
+  opacity: 0;
 }
 .timesetter form input[type=number] {
   background: 0;
@@ -175,6 +176,7 @@ h1, h2, h3, h4, h5 {
 .timesetter form label {
   font-weight: 700;
   text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent; /* Prevent blue outline flash */
 }
 .timesetter form span {
   font-size: 1rem;
@@ -210,6 +212,7 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
   border: 0;
   box-shadow: var(--button-shadow);
+  -webkit-tap-highlight-color: transparent; /* Prevent blue outline flash */
 }
 
 .button--aux {

@@ -18,7 +18,6 @@
 - Make settings screen with options for things like performace (no colours, or no gradient at least). Move orientation and sound buttons into this.
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Remember times previously set so on new match can replay with same time settings.
-- Remove blue flash on button click, (focus state?).
 
 
 
