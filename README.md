@@ -22,7 +22,7 @@
 
 
 
-# Modes
+## Modes
 1. __Standard__  
   Each player has a finite amount of time which decreases when it is their turn to move.
 
