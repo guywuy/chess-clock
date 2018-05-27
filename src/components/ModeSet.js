@@ -32,13 +32,13 @@ export const ModeSet = ({
           checked={mode==='hourglass'}
           />
           <RadioItem
-          className={`timesetter__mode-radio timesetter__mode-radio--three ${mode==='permove' ? 'timesetter__mode-radio--active' : ''}`}
-          value="permove"
+          className={`timesetter__mode-radio timesetter__mode-radio--three ${mode==='countdown' ? 'timesetter__mode-radio--active' : ''}`}
+          value="countdown"
           name="mode"
           handleChange={onHandleModeChange}
-          label="Per Move Mode"
+          label="Countdown Mode"
           description="Time is per move, reset each move"
-          checked={mode==='permove'}
+          checked={mode==='countdown'}
           />
 
         </div>

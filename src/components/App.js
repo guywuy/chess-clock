@@ -180,7 +180,7 @@ class App extends Component {
             }
           })
         } else {
-          // If game is permove mode, add time to time remaining for inactive
+          // If game is countdown mode, reset inactive half time to timeTotal.
           let timeTotalInactive = `timeTotal_${inactive}`;
           this.setState((prevState)=>{
             return {
