@@ -23,10 +23,6 @@ class App extends Component {
       'modeIsSet' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
-      'timeTotal_one' : 6000,
-      'timeTotal_two' : 6000,
-      'timeRemaining_one' : 6000,
-      'timeRemaining_two' : 6000,
       'mode' : 'standard',
       'muted' : true,
       'rotated' : false
@@ -41,6 +37,7 @@ class App extends Component {
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleModeSet = this.handleModeSet.bind(this);
+    this.handleBackToModeSet = this.handleBackToModeSet.bind(this);
     this.handleTimeSet = this.handleTimeSet.bind(this);
     this.endGame = this.endGame.bind(this);
     this.resetAndStartGame = this.resetAndStartGame.bind(this);
@@ -237,6 +234,12 @@ class App extends Component {
     })
   }
 
+  handleBackToModeSet(){  
+    this.setState({
+      'modeIsSet' : false,
+    })
+  }
+
   handleTimeSet(one, two){  
     this.setState({
       'timeIsSet' : true,
@@ -332,7 +335,7 @@ class App extends Component {
         }
 
         { this.state.modeIsSet && !this.state.timeIsSet && 
-        <TimeSet onSubmit={this.handleTimeSet} mode={this.state.mode} />
+        <TimeSet onSubmit={this.handleTimeSet} mode={this.state.mode} back={this.handleBackToModeSet} />
         }
 
         { this.state.showGameOverText &&

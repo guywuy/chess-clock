@@ -2,7 +2,8 @@ import React from 'react';
 
 export const TimeSet = ({
   onSubmit,
-  mode
+  mode,
+  back
 }) => {
 
   // Submit times for (white, black)
@@ -53,7 +54,10 @@ export const TimeSet = ({
             <span>mins</span>
           </div>
         </div>
-        <button type='submit' className='button'> Yes </button>
+        <div class="timesetter__button-container">
+          <button type='submit' className='button'> Go! </button>
+          <button className='button button--secondary' onClick={back}> Back </button>
+        </div>
       </form>
     </div>
   );
