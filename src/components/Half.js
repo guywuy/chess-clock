@@ -22,8 +22,7 @@ export const Half = ({
     const red = 'rgb(120, 0, 0)';
     const redSecondary = 'rgb(144, 0, 0)';
 
-    
-    style.background = `linear-gradient(to ${id === 'one' ? 'left' : 'right'}, ${active ? yellowSecondary : red } 0%, ${active ? yellowSecondary : redSecondary } ${percentComplete}%, ${active ? yellow : red } ${percentComplete+0.1}%, ${active ? yellow : red } 100%)`;
+    style.background = `linear-gradient(to ${id === 'one' ? 'left' : 'right'}, ${active ? yellow : red } 0%, ${active ? yellow : redSecondary } ${percentComplete}%, ${active ?yellowSecondary : red } ${percentComplete+0.1}%, ${active ?yellowSecondary : red } 100%)`;
     
     return style;
   }
