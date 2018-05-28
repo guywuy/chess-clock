@@ -17,6 +17,7 @@
 
     --button-width: 160px;
     --button-height: 60px;
+    --button-width--secondary: 100px;
     --button-width-half: 80px;
     --button-height-half: 30px;
     --button-font-size: 2rem;
@@ -184,6 +185,9 @@ h1, h2, h3, h4, h5 {
   display: flex;
   grid-area: submit;
 }
+.timesetter__button-container>* {
+  margin: 0 10px;
+}
 
 /* ---------------- */
 /* BUTTONS */
@@ -218,7 +222,9 @@ h1, h2, h3, h4, h5 {
 .button--secondary {
   border: 2px solid var(--color-mid);
   background: transparent;
-
+  font-weight: 300;
+  color: darkslategrey;
+  width: var(--button-width--secondary);
 }
 
 .button--aux {
@@ -365,6 +371,7 @@ h1, h2, h3, h4, h5 {
 
     --button-width: 90px;
     --button-height: 32px;
+    --button-width--secondary: 90px;
     --button-width-half: 45px;
     --button-height-half: 16px;
     --button-font-size: 1rem;

@@ -55,8 +55,8 @@ export const TimeSet = ({
           </div>
         </div>
         <div class="timesetter__button-container">
-          <button type='submit' className='button'> Go! </button>
           <button className='button button--secondary' onClick={back}> Back </button>
+          <button type='submit' className='button'> Go! </button>
         </div>
       </form>
     </div>
