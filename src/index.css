@@ -265,26 +265,23 @@ h1, h2, h3, h4, h5 {
   width: 100%;
   height: 100%;
   text-align: center;
-  background: rgba(120, 101, 85, 0.6);
+  background: rgba(170, 92, 29, 0.808);
   cursor: pointer;
 }
 .game-over-text text {
-  stroke: var(--color-green);
-  text-shadow: 2px 2px var(--color-primary);
+  stroke: #fff;
+  text-shadow: 3px 3px 6px var(--color-primary);
   transform-origin: center;
+  font-weight: bold;
 }
 .game-over-text .game-over-text__title {
   font-size: 10rem;
-  stroke-dashoffset: 100%;
-  stroke-dasharray: 100%;
-  -webkit-animation: draw 5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: draw 5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .game-over-text .game-over-text__subtitle {
   font-size: 5rem;
   opacity: 0;
-  -webkit-animation: appear 5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s;
-  animation: appear 5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s;
+  -webkit-animation: appear 2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s;
+  animation: appear 2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s;
 }
 
 
@@ -557,17 +554,6 @@ h1, h2, h3, h4, h5 {
 @keyframes appear {
   100% {
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes draw {
-  100% {
-    stroke-dashoffset: 0%;
-  }
-}
-@keyframes draw {
-  100% {
-    stroke-dashoffset: 0%;
   }
 }
 

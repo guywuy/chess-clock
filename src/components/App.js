@@ -340,8 +340,8 @@ class App extends Component {
 
         { this.state.showGameOverText &&
           <svg xmlns="http://www.w3.org/2000/svg" className="game-over-text">
-            <text x="50%" y="45%" textAnchor="middle" fill="#fff" stroke="#333" strokeWidth="2" onClick={ this.resetAndStartGame } className="game-over-text__title">TIME UP!</text>
-            <text x="50%" y="70%" textAnchor="middle" fill="#fff" stroke="#333" strokeWidth="1" onClick={ this.resetAndStartGame } className="game-over-text__subtitle">Play again?</text>
+            <text x="50%" y="45%" textAnchor="middle" fill="#fff" onClick={ this.resetAndStartGame } className="game-over-text__title">TIME UP!</text>
+            <text x="50%" y="70%" textAnchor="middle" fill="#fff" onClick={ this.resetAndStartGame } className="game-over-text__subtitle">Play again?</text>
           </svg>
         }
 

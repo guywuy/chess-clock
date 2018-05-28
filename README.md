@@ -7,20 +7,17 @@
 - Tap/click your half to switch countdown to other player.
 - Pause and cancel buttons.
 - Switch display orientation option.
-
+- PWA attributes (add to homescreen, works offline)
 
 
 ### Todo
 - Improve timeset input - show formatted time as hours, minutes and seconds. Make 'scrollable' so dragging up/down changes value up/down. Could use a library like - https://github.com/dogfessional/react-swipeable.
-- Improve 'Time Up' font to make more readable.
-- Check app manifest etc and add app icon so that it has appearance of native app. 
 - Make settings screen with options for things like performace (no colours, or no gradient at least). Move orientation and sound buttons into this.
+- Add 'Add to homescreen' button and event to settings screen
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Remember times previously set so on new match can replay with same time settings.
-- Try adding animation using a library like https://popmotion.io/pose/
-- Add analytics
-
-
+- Try adding animation using a library like https://popmotion.io/pose/.
+- Work out how best to handle 'back' press on mobile (without using router/url...). BeforeUnload to confirm?
 
 
 ## Modes
