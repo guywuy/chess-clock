@@ -228,7 +228,9 @@ class App extends Component {
     })
   }
 
-  handleModeSet(){  
+  handleModeSet(ev){
+    ev.preventDefault();
+      
     this.setState({
       'modeIsSet' : true,
     })

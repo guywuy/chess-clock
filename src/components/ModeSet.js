@@ -43,7 +43,7 @@ export const ModeSet = ({
 
         </div>
           
-        <div class="timesetter__button-container">
+        <div className="timesetter__button-container">
           <button type='submit' className='button'> Yes </button>
         </div>
 

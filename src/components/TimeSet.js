@@ -8,6 +8,7 @@ export const TimeSet = ({
 
   // Submit times for (white, black)
   function handleSubmit(ev){
+    ev.preventDefault();
     onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
   }
 
@@ -54,7 +55,7 @@ export const TimeSet = ({
             <span>mins</span>
           </div>
         </div>
-        <div class="timesetter__button-container">
+        <div className="timesetter__button-container">
           <button className='button button--secondary' onClick={back}> Back </button>
           <button type='submit' className='button'> Go! </button>
         </div>

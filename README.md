@@ -17,7 +17,8 @@
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Remember times previously set so on new match can replay with same time settings.
 - Try adding animation using a library like https://popmotion.io/pose/.
-- Work out how best to handle 'back' press on mobile (without using router/url...). BeforeUnload to confirm?
+- Work out how best to handle 'back' press on mobile (without using router/url...). BeforeUnload to confirm? Using PushState and PopState ? - https://stackoverflow.com/a/49719812 could be good solution. Probably better to use React Router, in which case make state with default settings
+- Check SetState timing - does it need to run (and therefore render) every 100 milliseconds? Can I reduce computation in render function? Maybe extract render stuff to 'Half' component, as this is the bit that will need it?
 
 
 ## Modes
