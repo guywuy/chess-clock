@@ -46,6 +46,12 @@ class App extends Component {
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.timerEnded = this.timerEnded.bind(this);
+
+    // Add popstate listener, so that back button press will return user to modeset screen
+    window.addEventListener('popstate', ev => {
+      this.resetAndStartGame();
+      this.handleBackToModeSet();
+    }, false);
   }
 
   handleHalfClick(){

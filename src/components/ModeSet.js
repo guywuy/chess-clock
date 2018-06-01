@@ -9,6 +9,8 @@ export const ModeSet = ({
 
   function handleSubmit(ev){
     ev.preventDefault();
+    window.history.pushState({}, '');
+
     onSubmit();
   }
 
