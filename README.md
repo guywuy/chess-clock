@@ -11,7 +11,7 @@
 
 
 ### Todo
-- Improve timeset input - show formatted time as hours, minutes and seconds. Make 'scrollable' so dragging up/down changes value up/down. Could use a library like - https://github.com/dogfessional/react-swipeable.
+- Improve timeset input - show formatted time as minutes and seconds. Make 'scrollable' so dragging up/down changes value up/down. Could use a library like - https://github.com/dogfessional/react-swipeable. Even better - mimic Android alarm clock time input - show clock face and allow visual touch input. 
 - Make settings screen with options for things like performace (no colours, or no gradient at least). Move orientation and sound buttons into this.
 - Add 'Add to homescreen' button and event to settings screen
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.

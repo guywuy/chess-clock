@@ -229,8 +229,6 @@ class App extends Component {
   }
 
   handleModeSet(ev){
-    ev.preventDefault();
-      
     this.setState({
       'modeIsSet' : true,
     })

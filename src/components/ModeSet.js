@@ -7,9 +7,14 @@ export const ModeSet = ({
   mode
 }) => {
 
+  function handleSubmit(ev){
+    ev.preventDefault();
+    onSubmit();
+  }
+
   return (
     <div className='overlay timesetter'>
-      <form action='' onSubmit={onSubmit}>
+      <form action='' onSubmit={handleSubmit}>
         <h1>Choose Mode</h1>
 
         <div className="timesetter__options-selector">

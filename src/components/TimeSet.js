@@ -12,14 +12,11 @@ export const TimeSet = ({
     onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
   }
 
-  function getAttrsBasedOnMode(){
-    const attributes = {
-      'min' : mode === 'standard' ? 1 : 0.2,
-      'max' : mode === 'standard' ? 60 : 30,
-      'step' : mode === 'standard' ? 1 : 0.1,
-      'default' : mode === 'standard' ? 10 : 1,
-    }
-    return attributes;
+  const numberInputAttributes = {
+    'min' : mode === 'standard' ? 1 : 0.2,
+    'max' : mode === 'standard' ? 60 : 30,
+    'step' : mode === 'standard' ? 1 : 0.1,
+    'default' : mode === 'standard' ? 10 : 1,
   }
 
   return (
@@ -34,10 +31,10 @@ export const TimeSet = ({
               type='number' 
               name='one' 
               id='timeOne' 
-              min={ getAttrsBasedOnMode().min } 
-              max={ getAttrsBasedOnMode().max } 
-              step={ getAttrsBasedOnMode().step } 
-              defaultValue={ getAttrsBasedOnMode().default } 
+              min={ numberInputAttributes.min } 
+              max={ numberInputAttributes.max } 
+              step={ numberInputAttributes.step } 
+              defaultValue={ numberInputAttributes.default } 
             />
             <span>mins</span>
           </div>
@@ -47,16 +44,16 @@ export const TimeSet = ({
               type='number' 
               name='two' 
               id='timeTwo' 
-              min={ getAttrsBasedOnMode().min } 
-              max={ getAttrsBasedOnMode().max } 
-              step={ getAttrsBasedOnMode().step } 
-              defaultValue={ getAttrsBasedOnMode().default } 
+              min={ numberInputAttributes.min } 
+              max={ numberInputAttributes.max } 
+              step={ numberInputAttributes.step } 
+              defaultValue={ numberInputAttributes.default } 
             />
             <span>mins</span>
           </div>
         </div>
         <div className="timesetter__button-container">
-          <button className='button button--secondary' onClick={back}> Back </button>
+          <button type="button" className='button button--secondary' onClick={back}> Back </button>
           <button type='submit' className='button'> Go! </button>
         </div>
       </form>
