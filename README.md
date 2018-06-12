@@ -11,12 +11,11 @@
 
 
 ### Todo
-- Improve timeset input - show formatted time as minutes and seconds. Make swipeable time changes relevant and limited to mode - e.g. swipe increase is at a lower rate for non-standard modes.
-- Make settings screen with options for things like performace (no colours, or no gradient at least). Move orientation and sound buttons into this.
+- Improve timeset input - show formatted time as minutes and seconds. Swipeable - prevent scrolling on up/down swipe and also prevent pull to refresh! Maybe swipe right left to change times instead of up/down.
+- Make settings screen with options for things like performance (no colours, or no gradient at least). Move orientation and sound buttons into this.
 - Add 'Add to homescreen' button and event to settings screen
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Remember times previously set so on new match can replay with same time settings.
-- Try adding animation using a library like https://popmotion.io/pose/.
 - Check push/popstate event/event listeners are working correctly. Maybe convert to use routing, hashbased or reactrouter. 
 - Check SetState timing - does it need to run (and therefore render) every 100 milliseconds? Can I reduce computation in render function? Maybe extract render stuff to 'Half' component, as this is the bit that will need it?
 

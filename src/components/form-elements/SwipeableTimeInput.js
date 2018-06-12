@@ -19,7 +19,7 @@ class SwipeableTimeInput extends Component {
     let time = Math.round(millis/10);
     let minutes = Math.floor(time/60);
     let seconds = time%60;
-    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    return `${minutes}m:${seconds < 10 ? '0' + seconds + 's' : seconds + 's'}`;
   }
 
   swiping(e, deltaX, deltaY, absX, absY, velocity) {
