@@ -17,10 +17,10 @@ export const TimeSet = ({
   }
 
   const numberInputAttributes = {
-    'min' : mode === 'standard' ? 1 : 0.2,
+    'min' : mode === 'standard' ? 1 : 0.1,
     'max' : mode === 'standard' ? 60 : 30,
     'step' : mode === 'standard' ? 1 : 0.1,
-    'default' : mode === 'standard' ? 10 : 1,
+    'default' : mode === 'standard' ? 10 : 0.5,
   }
 
   return (

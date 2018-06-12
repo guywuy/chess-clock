@@ -11,27 +11,36 @@ class SwipeableTimeInput extends Component {
     }
 
     this.onChange = this.onChange.bind(this);
-    this.swipingUp = this.swipingUp.bind(this);
-    this.swipingDown = this.swipingDown.bind(this);
+    this.swiping = this.swiping.bind(this);
 
   }
 
-  swipingUp(e, absY) {
-    // console.log("You're Swiping to the Up...", e, absY);
-    if (this.state.value < this.props.max){
-      this.setState({'value' : Math.round(this.state.value + absY/100)});
+  formatTime(millis){
+    let time = Math.round(millis/10);
+    let minutes = Math.floor(time/60);
+    let seconds = time%60;
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+  }
+
+  swiping(e, deltaX, deltaY, absX, absY, velocity) {
+
+    let change = Math.floor(deltaY/10);
+    // console.log(change)
+
+    if (change > 0 && this.state.value < this.props.max){
+
+      this.setState({'value' : +(this.state.value + this.props.step).toFixed(1)});
+      
     }
-  }
 
-  swipingDown(e, absY) {
-    // console.log("You're Swiping to the Up...", e, absY);
-    if (this.state.value > this.props.min){
-      this.setState({'value' : Math.round(this.state.value - absY/100)});
+    if (change < 0 && this.state.value > this.props.min){
+
+      this.setState({'value' : +(this.state.value - this.props.step).toFixed(1)});
+
     }
   }
   
   onChange(e) {
-    // console.log('value has changed');
     this.setState({'value' : e.target.value});
   }
 
@@ -39,8 +48,7 @@ class SwipeableTimeInput extends Component {
     return (
       <div className={`timesetter__time-input timesetter__time-input--${this.props.name}`}>
         <Swipeable
-        onSwipingUp={this.swipingUp} 
-        onSwipingDown={this.swipingDown} 
+        onSwiping={this.swiping} 
         >
           <label htmlFor={ this.props.id }>{ this.props.label }</label>
           <input 
@@ -53,7 +61,8 @@ class SwipeableTimeInput extends Component {
             value={ this.state.value }
             onChange={ this.onChange }
           />
-          <span>mins</span>
+          {/* <span>mins</span> */}
+          <span>{ this.formatTime(this.state.value*600) }</span>
         </Swipeable>
       </div>
     )
