@@ -1,4 +1,6 @@
 import React from 'react';
+import SwipeableTimeInput from './form-elements/SwipeableTimeInput.js';
+
 
 export const TimeSet = ({
   onSubmit,
@@ -8,8 +10,10 @@ export const TimeSet = ({
 
   // Submit times for (white, black)
   function handleSubmit(ev){
+    let w = document.querySelector('#timeOne');
+    let b = document.querySelector('#timeTwo');
     ev.preventDefault();
-    onSubmit( Math.floor(ev.target.one.value*600), Math.floor(ev.target.two.value*600));
+    onSubmit( Math.floor(w.value*600), Math.floor(b.value*600));
   }
 
   const numberInputAttributes = {
@@ -25,32 +29,27 @@ export const TimeSet = ({
         <h1>Set Times</h1>
         
         <div className="timesetter__options-selector">
-          <div className="timesetter__time-input timesetter__time-input--one">
-            <label htmlFor="timeOne">White</label>
-            <input 
-              type='number' 
-              name='one' 
-              id='timeOne' 
-              min={ numberInputAttributes.min } 
-              max={ numberInputAttributes.max } 
-              step={ numberInputAttributes.step } 
-              defaultValue={ numberInputAttributes.default } 
-            />
-            <span>mins</span>
-          </div>
-          <div className="timesetter__time-input timesetter__time-input--two">
-            <label htmlFor="timeOne">Black</label>
-            <input 
-              type='number' 
-              name='two' 
-              id='timeTwo' 
-              min={ numberInputAttributes.min } 
-              max={ numberInputAttributes.max } 
-              step={ numberInputAttributes.step } 
-              defaultValue={ numberInputAttributes.default } 
-            />
-            <span>mins</span>
-          </div>
+
+          <SwipeableTimeInput 
+            name='one' 
+            id='timeOne' 
+            label='White' 
+            min={ numberInputAttributes.min } 
+            max={ numberInputAttributes.max } 
+            step={ numberInputAttributes.step } 
+            defaultValue={ numberInputAttributes.default }
+          />
+
+          <SwipeableTimeInput 
+            name='two' 
+            id='timeTwo' 
+            label='Black' 
+            min={ numberInputAttributes.min } 
+            max={ numberInputAttributes.max } 
+            step={ numberInputAttributes.step } 
+            defaultValue={ numberInputAttributes.default }
+          />
+          
         </div>
         <div className="timesetter__button-container">
           <button type="button" className='button button--secondary' onClick={back}> Back </button>

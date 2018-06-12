@@ -67,6 +67,8 @@ h1, h2, h3, h4, h5 {
   display: grid;
   justify-content: center;
   align-content: center;
+  -webkit-tap-highlight-color: transparent; /* Prevent blue outline flash */
+
 }
 .half.active {
   cursor: pointer;
