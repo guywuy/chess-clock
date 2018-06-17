@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import Half from './Half';
-import MuteButton from './MuteButton';
 import CenterButton from './CenterButton';
 import StopButton from './StopButton';
-import RotateButton from './RotateButton';
+import SettingsButton from './SettingsButton';
+import SettingsScreen from './SettingsScreen';
 import ModeSet from './ModeSet';
 import TimeSet from './TimeSet';
 import Confirmation from './Confirmation';
@@ -20,6 +20,7 @@ class App extends Component {
       'paused' : false,
       'showStopGameConfirmation' : false,
       'showGameOverText' : false,
+      'showSettingsScreen' : false,
       'modeIsSet' : false,
       'timeIsSet' : false,
       'currentlyActive' : 'none',
@@ -32,9 +33,11 @@ class App extends Component {
     this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleRotateClick = this.handleRotateClick.bind(this);
+    this.handleSettingsClick = this.handleSettingsClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
+    // this.handleSettingsFinish = this.handleSettingsFinish.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleModeSet = this.handleModeSet.bind(this);
     this.handleBackToModeSet = this.handleBackToModeSet.bind(this);
@@ -86,6 +89,12 @@ class App extends Component {
   handleRotateClick(){
     this.setState({
       'rotated' : !this.state.rotated
+    });
+  }
+
+  handleSettingsClick(){
+    this.setState({
+      'showSettingsScreen' : !this.state.showSettingsScreen
     });
   }
 
@@ -318,16 +327,21 @@ class App extends Component {
             onClick = {this.handleCenterButtonClick}
           />
 
-          <MuteButton 
-            muted = {this.state.muted}
-            onClick = {this.handleMuteClick} 
-          />
-          
-          <RotateButton 
-            onClick = {this.handleRotateClick} 
-          />
+
+          <SettingsButton 
+            onClick = {this.handleSettingsClick}
+            />
 
         </div>
+
+        { this.state.showSettingsScreen && 
+        <SettingsScreen 
+          onFinished={this.handleSettingsClick}
+          onRotateClick = {this.handleRotateClick} 
+          onMuteClick = {this.handleMuteClick} 
+          muted = {this.state.muted}
+        /> 
+        }
 
         { this.state.showStopGameConfirmation && 
         <Confirmation 

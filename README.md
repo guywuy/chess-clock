@@ -12,8 +12,8 @@
 
 ### Todo
 - Use React Router and remove custom push/popstate behaviour.
-- Autoprefix css!
-- Make settings screen with options for things like performance (no colours, or no gradient at least). Move orientation and sound buttons into this.
+- Autoprefix css! (Have build process to keep source separate. Ideally use sass, too).
+- Improve style of settings screen.
 - Add 'Add to homescreen' button and event to settings screen.
 - Use better icons (and colours) - Material design icons
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.

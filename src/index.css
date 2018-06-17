@@ -114,6 +114,10 @@ h1, h2, h3, h4, h5 {
   justify-content: center;
 }
 
+.overlay--alpha {
+  background: rgba(255, 255, 240, 0.9);
+}
+
 /* ---------------- */
 /* TIMESETTER */
 /* ---------------- */
@@ -231,12 +235,13 @@ h1, h2, h3, h4, h5 {
 
 .button--aux {
   cursor: pointer;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: var(--aux-button-width);
   height: var(--aux-button-width);
   background: white;
   color: white;
   text-align: center;
+  -webkit-tap-highlight-color: transparent; /* Prevent blue outline flash */
 }
 
 .button--aux svg {
@@ -255,6 +260,17 @@ h1, h2, h3, h4, h5 {
   margin: 1rem;
 }
 
+
+/* ---------------- */
+/* SETTINGS SCREEN */
+/* ---------------- */
+
+.settings .button--aux {
+  display: inline-block;
+  margin: 2rem 2rem 8rem 2rem;
+  color: black;
+  font-weight: bold;
+}
 
 /* ---------------- */
 /* END SCREEN */
