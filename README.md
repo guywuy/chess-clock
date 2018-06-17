@@ -11,13 +11,15 @@
 
 
 ### Todo
-- Improve timeset input - show formatted time as minutes and seconds. Swipeable - prevent scrolling on up/down swipe and also prevent pull to refresh! Maybe swipe right left to change times instead of up/down.
+- Use React Router and remove custom push/popstate behaviour.
+- Autoprefix css!
 - Make settings screen with options for things like performance (no colours, or no gradient at least). Move orientation and sound buttons into this.
-- Add 'Add to homescreen' button and event to settings screen
+- Add 'Add to homescreen' button and event to settings screen.
+- Use better icons (and colours) - Material design icons
 - Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Remember times previously set so on new match can replay with same time settings.
-- Check push/popstate event/event listeners are working correctly. Maybe convert to use routing, hashbased or reactrouter. 
 - Check SetState timing - does it need to run (and therefore render) every 100 milliseconds? Can I reduce computation in render function? Maybe extract render stuff to 'Half' component, as this is the bit that will need it?
+- Improve timeset input - show formatted time as minutes and seconds. Swipeable - prevent scrolling on up/down swipe and also prevent pull to refresh! Maybe swipe right left to change times instead of up/down.
 
 
 ## Modes
