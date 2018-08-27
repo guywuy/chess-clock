@@ -24,20 +24,17 @@ class SwipeableTimeInput extends Component {
 
   swiping(e, deltaX, deltaY, absX, absY, velocity) {
 
-    let change = Math.floor(deltaY/10);
-    // console.log(change)
+    let change = (deltaY * velocity * this.props.step);
+    
+    // If positive change, and value is still less than max, add change to value, vice versa for negative change
+    if ((change > 0 && this.state.value < this.props.max) || (change < 0 && this.state.value > this.props.min)){
+      
+      let newValue = Number(this.state.value + (change / 10));
 
-    if (change > 0 && this.state.value < this.props.max){
-
-      this.setState({'value' : +(this.state.value + this.props.step).toFixed(1)});
+      this.setState({ 'value' : newValue });
       
     }
 
-    if (change < 0 && this.state.value > this.props.min){
-
-      this.setState({'value' : +(this.state.value - this.props.step).toFixed(1)});
-
-    }
   }
   
   onChange(e) {
@@ -57,11 +54,10 @@ class SwipeableTimeInput extends Component {
             id= { this.props.id } 
             min={ this.props.min } 
             max={ this.props.max } 
-            step={ this.props.step } 
-            value={ this.state.value }
+            step="any"
+            value={ this.props.step === 0.1 ? Number(this.state.value.toFixed(1)) : Math.round(this.state.value) }
             onChange={ this.onChange }
           />
-          {/* <span>mins</span> */}
           <span>{ this.formatTime(this.state.value*600) }</span>
         </Swipeable>
       </div>
