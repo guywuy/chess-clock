@@ -24,7 +24,9 @@ export const CenterButton = ({
   }
 
   return (
-    <div className='button button--center' onClick={handleClick}>
+    <div 
+      className={ paused ? 'button button--center button--paused' : 'button button--center' }
+      onClick={handleClick}>
       {getCommand().toUpperCase()}
     </div>
   );

@@ -3,7 +3,7 @@
     --color-primary--alpha: rgba(120, 0, 0, 0.5);
     --color-neutral: rgb(255, 230, 175);
     --color-neutral--alpha: rgba(255, 230, 175, 0.5);
-    --color-green: #688E26;
+    --color-gray: #888888;
     --color-light: #e4e4e4;
     --color-dark: #230614;
     --color-mid: rgb(255, 165, 82);
@@ -115,7 +115,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .overlay--alpha {
-  background: rgba(255, 255, 240, 0.9);
+  background: rgba(255, 255, 240, 0.94);
 }
 
 /* ---------------- */
@@ -208,7 +208,11 @@ h1, h2, h3, h4, h5 {
 
 .buttons.highlight {
   box-shadow: 0 0 6vw 6vw rgba(0, 0, 0, 0.6);
-  background: var(--color-green);
+  background: var(--color-gray);
+}
+
+.buttons.highlight .button--paused {
+  transform: scale(2);
 }
 
 .button {
@@ -235,7 +239,6 @@ h1, h2, h3, h4, h5 {
 
 .button--aux {
   cursor: pointer;
-  /* border-radius: 50%; */
   width: var(--aux-button-width);
   height: var(--aux-button-width);
   background: white;
@@ -329,6 +332,9 @@ h1, h2, h3, h4, h5 {
   }
   .app.rotated .button--center {
     transform: rotate(90deg);
+  }
+  .app.rotated .button--center.button--paused {
+    transform: rotate(90deg) scale(2);
   }
 }
 
