@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .overlay--alpha {
-  background: rgba(255, 255, 240, 0.94);
+  background: rgba(255, 255, 240, 0.96);
 }
 
 /* ---------------- */
@@ -269,11 +269,16 @@ h1, h2, h3, h4, h5 {
 /* SETTINGS SCREEN */
 /* ---------------- */
 
+.settings .button {
+  box-shadow: 0 0 0 4px #230614;
+}
+
 .settings .button--aux {
   display: inline-block;
   margin: 2rem 2rem 8rem 2rem;
   color: black;
   font-weight: bold;
+  background: #230614;
 }
 
 /* ---------------- */

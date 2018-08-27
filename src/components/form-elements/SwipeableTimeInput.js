@@ -29,7 +29,13 @@ class SwipeableTimeInput extends Component {
     // If positive change, and value is still less than max, add change to value, vice versa for negative change
     if ((change > 0 && this.state.value < this.props.max) || (change < 0 && this.state.value > this.props.min)){
       
-      let newValue = Number(this.state.value + (change / 10));
+      let newValue = this.state.value + (change / 10);
+
+      if (this.props.step === 0.1) {
+        newValue = Math.round(newValue * 100) / 100;
+      } else {
+        newValue = Math.round(newValue * 10) / 10;
+      }
 
       this.setState({ 'value' : newValue });
       
@@ -55,7 +61,7 @@ class SwipeableTimeInput extends Component {
             min={ this.props.min } 
             max={ this.props.max } 
             step="any"
-            value={ this.props.step === 0.1 ? Number(this.state.value.toFixed(1)) : Math.round(this.state.value) }
+            value={ this.state.value }
             onChange={ this.onChange }
           />
           <span>{ this.formatTime(this.state.value*600) }</span>

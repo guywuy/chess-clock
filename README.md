@@ -12,10 +12,8 @@
 
 ### Todo
 - Use React Router and remove custom push/popstate behaviour.
-- Autoprefix css! (Have build process to keep source separate. Ideally use sass, too).
 - Improve style of settings screen.
 - Add 'Add to homescreen' button and event to settings screen.
-- Make 'undo' button for countdown mode, so if clock is pressed accidently or wrongly, can revert to their previous amount of time.
 - Check SetState timing - does it need to run (and therefore render) every 100 milliseconds? Can I reduce computation in render function? Maybe extract render stuff to 'Half' component, as this is the bit that will need it?
 - Add indication that time input is swipeable on mobile - (e.g. display up down arrow)
 - Check if chrome.power is possible to keep screen awake (add as a setting)
