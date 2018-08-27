@@ -38,7 +38,6 @@ export const TimeSet = ({
       return numberInputAttributes.default;
     } else {
       let time = localStorage.getItem(`previousSetting--${mode}--${whichInput}`);
-      console.log('time retrieved from localstorage: ', time)
       return Number(time);
     }
 

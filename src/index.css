@@ -40,6 +40,7 @@ body {
   padding: 0;
   font-family: var(--body-font);
   color: var(--color-dark);
+  overscroll-behavior-y: none;
 }
 
 button {
