@@ -37,7 +37,6 @@ class App extends Component {
     this.handleStopClick = this.handleStopClick.bind(this);
     this.handleStopConfirmation = this.handleStopConfirmation.bind(this);
     this.handleStopCancellation = this.handleStopCancellation.bind(this);
-    // this.handleSettingsFinish = this.handleSettingsFinish.bind(this);
     this.handleModeChange = this.handleModeChange.bind(this);
     this.handleModeSet = this.handleModeSet.bind(this);
     this.handleBackToModeSet = this.handleBackToModeSet.bind(this);

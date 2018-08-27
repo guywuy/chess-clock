@@ -13,6 +13,12 @@ export const TimeSet = ({
     let w = document.querySelector('#timeOne');
     let b = document.querySelector('#timeTwo');
     ev.preventDefault();
+
+    if (window.localStorage) {
+      localStorage.setItem(`previousSetting--${mode}--one`, w.value)
+      localStorage.setItem(`previousSetting--${mode}--two`, b.value)
+    }
+
     onSubmit( Math.floor(w.value*600), Math.floor(b.value*600));
   }
 
@@ -21,6 +27,21 @@ export const TimeSet = ({
     'max' : mode === 'standard' ? 60 : 30,
     'step' : mode === 'standard' ? 1 : 0.1,
     'default' : mode === 'standard' ? 10 : 0.5,
+  }
+
+  function getDefaultValue(whichInput){
+
+    if (!window.localStorage) return numberInputAttributes.default;
+
+    // Check if value is in local storage. If not, return default
+    if (!(localStorage.getItem(`previousSetting--${mode}--one`) || localStorage.getItem(`previousSetting--${mode}--two`)) ) {
+      return numberInputAttributes.default;
+    } else {
+      let time = localStorage.getItem(`previousSetting--${mode}--${whichInput}`);
+      console.log('time retrieved from localstorage: ', time)
+      return Number(time);
+    }
+
   }
 
   return (
@@ -37,7 +58,7 @@ export const TimeSet = ({
             min={ numberInputAttributes.min } 
             max={ numberInputAttributes.max } 
             step={ numberInputAttributes.step } 
-            defaultValue={ numberInputAttributes.default }
+            defaultValue={ getDefaultValue('one') }
           />
 
           <SwipeableTimeInput 
@@ -47,7 +68,7 @@ export const TimeSet = ({
             min={ numberInputAttributes.min } 
             max={ numberInputAttributes.max } 
             step={ numberInputAttributes.step } 
-            defaultValue={ numberInputAttributes.default }
+            defaultValue={ getDefaultValue('two') }
           />
           
         </div>
