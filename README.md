@@ -16,7 +16,7 @@
 - Add 'Add to homescreen' button and event to settings screen.
 - Check SetState timing - does it need to run (and therefore render) every 100 milliseconds? Can I reduce computation in render function? Maybe extract render stuff to 'Half' component, as this is the bit that will need it?
 - Add indication that time input is swipeable on mobile - (e.g. display up down arrow)
-- Check if chrome.power is possible to keep screen awake (add as a setting)
+- Add small button on timeset to copy time from one to other to make times the same
 
 
 

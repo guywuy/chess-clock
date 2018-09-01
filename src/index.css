@@ -6,7 +6,7 @@
     --color-gray: #888888;
     --color-light: #e4e4e4;
     --color-dark: #230614;
-    --color-mid: rgb(255, 165, 82);
+    --color-mid: #ffa552;
 
     --body-font: 'Poiret One', sans-serif;
 
@@ -170,16 +170,52 @@ h1, h2, h3, h4, h5 {
 .timesetter__mode-radio input {
   display: none;
 }
+.timesetter__time-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.timesetter__time-input strong {
+  margin-right: 1rem;
+}
 .timesetter form input[type=number] {
   background: 0;
-  padding: 1rem;
+  padding: 1rem 0.2rem;
   line-height: 1.4rem;
-  margin-left: 1rem;
+  margin-left: 0.4rem;
   margin-right: 0.4rem;
-  font-size: 4rem;
-  width: 3em;
+  font-size: 3rem;
+  width: 5rem;
+  text-align: center;
   border: 3px solid var(--color-mid);
 }
+.timesetter__time-increment,
+.timesetter__time-decrement {
+  position: absolute;
+  left: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+.timesetter__time-increment--disabled,
+.timesetter__time-decrement--disabled {
+  opacity: 0.3;;
+}
+.timesetter__time-increment {
+  top: -2rem;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxwYXRoIGQ9Ik0xMiA4bC02IDYgMS40MSAxLjQxTDEyIDEwLjgzbDQuNTkgNC41OEwxOCAxNHoiIGZpbGw9IiNmZmE1NTIiLz4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KPC9zdmc+Cg==');
+
+
+}
+.timesetter__time-decrement {
+  bottom: -2rem;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxwYXRoIGQ9Ik0xNi41OSA4LjU5TDEyIDEzLjE3IDcuNDEgOC41OSA2IDEwbDYgNiA2LTZ6IiBmaWxsPSIjZmZhNTUyIi8+CiAgICA8cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+Cjwvc3ZnPgo=');
+
+}
+
 .timesetter form label {
   font-weight: 700;
   text-transform: uppercase;
@@ -317,7 +353,7 @@ h1, h2, h3, h4, h5 {
 /* ---------------- */
 @media (orientation: landscape){
   .app {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 1fr;
   }
 
@@ -374,6 +410,16 @@ h1, h2, h3, h4, h5 {
 
   .timesetter__mode-radio label {
     padding: 1rem;
+  }
+
+  .timesetter__time-input {
+    flex-wrap: wrap;
+  }
+
+  .timesetter__time-input strong {
+    margin-top: -3rem;
+    margin-right: 0;
+    width: 100%;
   }
 
   .timesetter form input[type=number] {
@@ -453,7 +499,7 @@ h1, h2, h3, h4, h5 {
 
   .app {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 50% 50%;
   }
 
   .timesetter form {
@@ -524,6 +570,10 @@ h1, h2, h3, h4, h5 {
 
   .timesetter__mode-radio label {
     padding: 1rem;
+  }
+
+  .timesetter__time-input strong {
+    font-size: 1rem;
   }
 
   .timesetter form input[type=number] {

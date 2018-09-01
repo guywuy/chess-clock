@@ -1,5 +1,5 @@
 import React from 'react';
-import SwipeableTimeInput from './form-elements/SwipeableTimeInput.js';
+import TimeInputController from './form-elements/TimeInputController.js';
 
 
 export const TimeSet = ({
@@ -8,36 +8,41 @@ export const TimeSet = ({
   back
 }) => {
 
-  // Submit times for (white, black)
+  // Submit times for (one, two) in milliseconds
   function handleSubmit(ev){
-    let w = document.querySelector('#timeOne');
-    let b = document.querySelector('#timeTwo');
+    let oneMinutes = document.querySelector('#timeOne--minutes').value;
+    let oneSeconds = document.querySelector('#timeOne--seconds').value;
+    let twoMinutes = document.querySelector('#timeTwo--minutes').value;
+    let twoSeconds = document.querySelector('#timeTwo--seconds').value;
     ev.preventDefault();
 
     if (window.localStorage) {
-      localStorage.setItem(`previousSetting--${mode}--one`, w.value)
-      localStorage.setItem(`previousSetting--${mode}--two`, b.value)
+      localStorage.setItem(`previousSetting--${mode}--one--minutes`, oneMinutes)
+      localStorage.setItem(`previousSetting--${mode}--one--seconds`, oneSeconds)
+      localStorage.setItem(`previousSetting--${mode}--two--minutes`, twoMinutes)
+      localStorage.setItem(`previousSetting--${mode}--two--seconds`, twoSeconds)
     }
 
-    onSubmit( Math.floor(w.value*600), Math.floor(b.value*600));
+    let timeOneToSubmit = Math.floor((oneMinutes * 600) + (oneSeconds * 10));
+    let timeTwoToSubmit = Math.floor((twoMinutes * 600) + (twoSeconds * 10));
+
+    onSubmit( timeOneToSubmit, timeTwoToSubmit);
   }
 
-  const numberInputAttributes = {
-    'min' : mode === 'standard' ? 1 : 0.1,
-    'max' : mode === 'standard' ? 60 : 30,
-    'step' : mode === 'standard' ? 1 : 0.1,
-    'default' : mode === 'standard' ? 10 : 0.5,
-  }
+  // Default time is object with minutes and seconds with values depending on the mode
+  const defaultTime = mode === 'standard' ? { 'minutes' : 10, 'seconds' : 0 } : { 'minutes' : 1, 'seconds' : 30 };
 
-  function getDefaultValue(whichInput){
+  function getDefaultValue(whichInput, whichTimeUnit){
 
-    if (!window.localStorage) return numberInputAttributes.default;
+    if (!window.localStorage) {
+      return defaultTime[whichTimeUnit];
+    }
 
     // Check if value is in local storage. If not, return default
-    if (!(localStorage.getItem(`previousSetting--${mode}--one`) || localStorage.getItem(`previousSetting--${mode}--two`)) ) {
-      return numberInputAttributes.default;
+    if (!(localStorage.getItem(`previousSetting--${mode}--one--${whichTimeUnit}`) || localStorage.getItem(`previousSetting--${mode}--two--${whichTimeUnit}`)) ) {
+      return defaultTime[whichTimeUnit];
     } else {
-      let time = localStorage.getItem(`previousSetting--${mode}--${whichInput}`);
+      let time = localStorage.getItem(`previousSetting--${mode}--${whichInput}--${whichTimeUnit}`);
       return Number(time);
     }
 
@@ -49,25 +54,20 @@ export const TimeSet = ({
         <h1>Set Times</h1>
         
         <div className="timesetter__options-selector">
-
-          <SwipeableTimeInput 
+          <TimeInputController 
             name='one' 
-            id='timeOne' 
+            idBase='timeOne' 
             label='White' 
-            min={ numberInputAttributes.min } 
-            max={ numberInputAttributes.max } 
-            step={ numberInputAttributes.step } 
-            defaultValue={ getDefaultValue('one') }
-          />
+            defaultValueMinutes={ getDefaultValue('one', 'minutes') }
+            defaultValueSeconds={ getDefaultValue('one', 'seconds') }
+            />
 
-          <SwipeableTimeInput 
+          <TimeInputController 
             name='two' 
-            id='timeTwo' 
+            idBase='timeTwo' 
             label='Black' 
-            min={ numberInputAttributes.min } 
-            max={ numberInputAttributes.max } 
-            step={ numberInputAttributes.step } 
-            defaultValue={ getDefaultValue('two') }
+            defaultValueMinutes={ getDefaultValue('two', 'minutes') }
+            defaultValueSeconds={ getDefaultValue('two', 'seconds') }
           />
           
         </div>

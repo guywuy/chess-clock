@@ -1,74 +1,60 @@
-import React, { Component } from 'react';
-import Swipeable from 'react-swipeable';
+import React from "react";
+import Swipeable from "react-swipeable";
 
-class SwipeableTimeInput extends Component {
+export const SwipeableTimeInput = ({
+  timeUnit,
+  name,
+  handleChange,
+  value,
+  id
+}) => {
+  function swiping(e, deltaX, deltaY, absX, absY, velocity) {
+    let change = deltaY * velocity;
 
-  constructor(props){
-    super(props);
-
-    this.state = {
-      'value' : this.props.defaultValue
-    }
-
-    this.onChange = this.onChange.bind(this);
-    this.swiping = this.swiping.bind(this);
-
-  }
-
-  formatTime(millis){
-    let time = Math.round(millis/10);
-    let minutes = Math.floor(time/60);
-    let seconds = time%60;
-    return `${minutes}m:${seconds < 10 ? '0' + seconds + 's' : seconds + 's'}`;
-  }
-
-  swiping(e, deltaX, deltaY, absX, absY, velocity) {
-
-    let change = (deltaY * velocity * this.props.step);
-    
     // If positive change, and value is still less than max, add change to value, vice versa for negative change
-    if ((change > 0 && this.state.value < this.props.max) || (change < 0 && this.state.value > this.props.min)){
-      
-      let newValue = this.state.value + (change / 10);
+    if ((change > 0 && value < 60) || (change < 0 && value > 0)) {
+      let newValue = Math.round(value + change / 10);
 
-      if (this.props.step === 0.1) {
-        newValue = Math.round(newValue * 100) / 100;
-      } else {
-        newValue = Math.round(newValue * 10) / 10;
-      }
+      if (newValue > 60) newValue = 60;
+      if (newValue < 0) newValue = 0;
 
-      this.setState({ 'value' : newValue });
-      
+      handleChange(timeUnit, newValue);
     }
-
-  }
-  
-  onChange(e) {
-    this.setState({'value' : e.target.value});
   }
 
-  render() {
-    return (
-      <div className={`timesetter__time-input timesetter__time-input--${this.props.name}`}>
-        <Swipeable
-        onSwiping={this.swiping} 
-        >
-          <label htmlFor={ this.props.id }>{ this.props.label }</label>
-          <input 
-            type='number' 
-            name={ this.props.name }
-            id= { this.props.id } 
-            min={ this.props.min } 
-            max={ this.props.max } 
-            step="any"
-            value={ this.state.value }
-            onChange={ this.onChange }
-          />
-          <span>{ this.formatTime(this.state.value*600) }</span>
-        </Swipeable>
-      </div>
-    )
+  function onChange(e) {
+    handleChange(timeUnit, e.target.value);
   }
-}
+
+  function increment() {
+    if (value<60) handleChange(timeUnit, value + 1);
+  }
+
+  function decrement() {
+    if (value>0) handleChange(timeUnit, value - 1);
+  }
+
+  return (
+    <div
+      className={`timesetter__time-input timesetter__time-input--${name}--${timeUnit}`}
+    >
+      <Swipeable onSwiping={swiping}>
+        <span className={value < 60 ? 'timesetter__time-increment' : 'timesetter__time-increment timesetter__time-increment--disabled' } onClick={increment}></span>
+        <input
+          type="number"
+          name={name}
+          id={id}
+          min="0"
+          max="60"
+          step="1"
+          value={value}
+          onChange={onChange}
+        />
+        <span className={value > 0 ? 'timesetter__time-decrement' : 'timesetter__time-decrement timesetter__time-decrement--disabled' } onClick={decrement}></span>
+        <label htmlFor={id}>{timeUnit.substring(0, 1)}</label>
+      </Swipeable>
+    </div>
+  );
+};
 
 export default SwipeableTimeInput;
