@@ -9,6 +9,11 @@ import ModeSet from './ModeSet';
 import TimeSet from './TimeSet';
 import Confirmation from './Confirmation';
 
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+var switchBuffer;
+var tickBuffer;
+var tickingSource;
+
 class App extends Component {
 
   constructor(){
@@ -29,6 +34,7 @@ class App extends Component {
       'rotated' : false
     }
 
+
     this.handleCenterButtonClick = this.handleCenterButtonClick.bind(this);
     this.handleHalfClick = this.handleHalfClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
@@ -44,7 +50,9 @@ class App extends Component {
     this.endGame = this.endGame.bind(this);
     this.resetAndStartGame = this.resetAndStartGame.bind(this);
     this.playSound = this.playSound.bind(this);
-    this.pauseSound = this.pauseSound.bind(this);
+    this.playSwitch = this.playSwitch.bind(this);
+    this.playTick = this.playTick.bind(this);
+    this.stopTicking = this.stopTicking.bind(this);
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.timerEnded = this.timerEnded.bind(this);
@@ -54,14 +62,74 @@ class App extends Component {
       this.resetAndStartGame();
       this.handleBackToModeSet();
     }, false);
+
+    
+  }
+  
+  componentDidMount() {
+    if (!this.state.muted) {
+      this.initAudioContextAndLoadFiles();
+    }
+
+  }
+  
+  initAudioContextAndLoadFiles(){
+
+    const urlSwitch = '/audio/switch.mp3';
+    const urlTick = '/audio/ticking.mp3';
+
+    if (!switchBuffer){
+      fetch(urlSwitch).then(function(response) {
+        var reader = response.body.getReader();
+        function read() {
+          return reader.read().then(({ value, done }) => {
+            if (done) {
+              console.log('Fetch response for switch has been read.');
+              return;
+            } else {
+              audioContext.decodeAudioData(value.buffer, function(buffer) {
+                switchBuffer = buffer;
+              }, function(err) {
+                console.log("err(decodeAudioData): " + err);
+              });
+              
+            }
+            read()
+          });
+        }
+        read();
+      })
+    }
+
+    if (!tickBuffer){
+      fetch(urlTick).then(function(response) {
+        var reader = response.body.getReader();
+        function read() {
+          return reader.read().then(({ value, done }) => {
+            if (done) {
+              console.log('Fetch response for ticking has been read.');
+              return;
+            } else {
+              audioContext.decodeAudioData(value.buffer, function(buffer) {
+                tickBuffer = buffer;
+              }, function(err) {
+                console.log("err(decodeAudioData): " + err);
+              });
+              
+            }
+            read()
+          });
+        }
+        read();
+      })
+    }
   }
 
   handleHalfClick(){
     if (this.state.paused) return;
 
     if (!this.state.muted){
-      this.playSound('switch');
-      this.playSound('ticking');
+      this.playSwitch();
     }
 
     this.stopTimer();
@@ -74,10 +142,11 @@ class App extends Component {
 
   handleMuteClick(){
     if (!this.state.muted){
-      this.pauseSound('ticking');
+      this.stopTicking();
     } else {
+      this.initAudioContextAndLoadFiles();
       if (this.state.inProgress && !this.state.paused){
-        this.playSound('ticking');
+        this.playTick();
       }
     }
     this.setState({
@@ -99,7 +168,7 @@ class App extends Component {
 
   handleStopClick(){
     if (!this.state.muted){
-      this.pauseSound('ticking');
+      this.stopTicking();
     };
     this.stopTimer();
     this.setState({
@@ -114,7 +183,7 @@ class App extends Component {
 
   handleStopCancellation(){
     if (!this.state.muted){
-      this.playSound('ticking');
+      this.playTick();
     }
     this.startTimer();
     this.setState({
@@ -128,7 +197,7 @@ class App extends Component {
 
     if (which === 'pause'){
       if (!muted){
-        this.pauseSound('ticking');
+        this.stopTicking();
       }
       this.stopTimer();
       this.setState({
@@ -139,7 +208,7 @@ class App extends Component {
         'paused' : false
       }, () => {
         if (!muted){
-          this.playSound('ticking');
+          this.playTick();
         }
         this.startTimer();
       })
@@ -150,7 +219,7 @@ class App extends Component {
         'paused' : false
       }, () => {
         if (!muted){
-          this.playSound('ticking');
+          this.playTick();
         }
 
         this.startTimer();
@@ -211,7 +280,7 @@ class App extends Component {
 
   timerEnded(){
     if (!this.state.muted){
-      this.pauseSound('ticking');
+      this.stopTicking();
       this.playSound('whistle');
     }
     this.endGame();
@@ -277,16 +346,30 @@ class App extends Component {
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
 
+  playSwitch(){
+    const source = audioContext.createBufferSource();
+    source.buffer = switchBuffer;
+    source.connect(audioContext.destination);
+    source.start();
+  }
+
+  playTick(){
+    tickingSource = audioContext.createBufferSource();
+    tickingSource.buffer = tickBuffer;
+    tickingSource.loop = true;
+    tickingSource.connect(audioContext.destination);
+    tickingSource.start();
+  }
+
   playSound(id){
     let audio = document.getElementById(`audio_${id}`);
     audio.currentTime = 0;
     audio.play();
   }
-  pauseSound(id){
-    let audio = document.getElementById(`audio_${id}`);
-    audio.pause();
-  }
 
+  stopTicking(){
+    tickingSource.stop();
+  }
 
   render() {
     return (
